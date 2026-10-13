@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thịnh Thế Vinh Hoa × ZBS — Demo Tuyển dụng trên Zalo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --brand-primary: #0047AB;
+    --brand-primary-hover: #003893;
+    --brand-accent: #0095E8;
+    --brand-accent-light: #E8F4FF;
+    --zalo-blue: #0068FF;
+    --zalo-blue-hover: #0056D2;
+    --zalo-dark: #003C9A;
+    --bg-main: #F4F6F9;
+    --bg-card: #FFFFFF;
+    --text-primary: #1F2937;
+    --text-secondary: #4B5563;
+    --text-muted: #9CA3AF;
+    --border-color: #E5E7EB;
+    --success: #10B981;
+    --success-light: #ECFDF5;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --purple: #8B5CF6;
+    --purple-light: #F3E8FF;
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  .hdr {
+    background: linear-gradient(135deg, #0047AB 0%, #1A1A2E 100%);
+    color: #fff;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .hdr-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .hdr-logo-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .hdr-logo-brand {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--brand-accent);
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+  }
+  .hdr-logo-x {
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    font-size: 18px;
+  }
+  .hdr-logo-zalo {
+    background: #fff;
+    color: var(--zalo-blue);
+    font-weight: 900;
+    font-size: 14px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    letter-spacing: -0.5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .hdr-div {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.2);
+  }
+  .hdr-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 400;
+  }
+  .hdr-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #FF5A5F;
+    font-weight: 800;
+    background: rgba(255, 90, 95, 0.12);
+    border: 1px solid rgba(255, 90, 95, 0.25);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background: #FF5A5F;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+  .hdr-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--brand-accent);
+  }
+
+  /* ─── TABS NAVIGATION ─── */
+  .tabs-container {
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 66px; left: 0; right: 0;
+    z-index: 999;
+    padding: 0 32px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+  }
+  .tabs::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+  
+  .tab-btn {
+    padding: 14px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .tab-btn:hover {
+    color: var(--brand-primary);
+  }
+  .tab-btn.active {
+    color: var(--brand-primary);
+    border-bottom-color: var(--brand-primary);
+    font-weight: 700;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .main-content {
+    margin-top: 130px;
+    padding: 32px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: calc(100vh - 130px);
+  }
+
+  .tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .tab-pane.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── TAB 1: INTRO & PROPOSAL ─── */
+  .welcome-hero {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, #003893 100%);
+    border-radius: 20px;
+    padding: 56px 48px;
+    color: white;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(227, 24, 55, 0.15);
+  }
+  .welcome-hero::after {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .welcome-hero::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 10%;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--brand-accent);
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-size: 40px;
+    font-weight: 850;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    max-width: 800px;
+  }
+  .hero-title span {
+    color: var(--brand-accent);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 720px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 28px;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-stat .num {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--brand-accent);
+    line-height: 1.1;
+  }
+  .hero-stat .lbl {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .panel-card-intro {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+  }
+  .panel-card-intro h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .intro-problem-title { color: var(--brand-primary); }
+  .intro-solution-title { color: var(--zalo-blue); }
+
+  .problem-list, .solution-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .problem-item {
+    display: flex;
+    gap: 14px;
+    background: #EBF3FB;
+    border-left: 4px solid var(--brand-primary);
+    padding: 16px;
+    border-radius: 0 12px 12px 0;
+  }
+  .problem-item .icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .problem-item h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #9B1C1C;
+    margin-bottom: 4px;
+  }
+  .problem-item p {
+    font-size: 13px;
+    color: #7F1D1D;
+    line-height: 1.5;
+  }
+
+  .solution-item {
+    display: flex;
+    gap: 14px;
+    background: #F0F6FF;
+    border-left: 4px solid var(--zalo-blue);
+    padding: 16px;
+    border-radius: 0 12px 12px 0;
+  }
+  .solution-item .icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .solution-item h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--zalo-dark);
+    margin-bottom: 4px;
+  }
+  .solution-item p {
+    font-size: 13px;
+    color: #1E40AF;
+    line-height: 1.5;
+  }
+
+  /* ─── TAB 2: CUSTOMER EXPERIENCE (PHONE INTERACTIVE) ─── */
+  .experience-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* Phone Mockup */
+  .phone-container {
+    position: sticky;
+    top: 150px;
+  }
+  .phone-body {
+    background: #111827;
+    border-radius: 48px;
+    padding: 12px;
+    width: 350px;
+    height: 680px;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    margin: 0 auto;
+    border: 4px solid #374151;
+    position: relative;
+  }
+  .phone-screen {
+    background: #F3F4F6;
+    border-radius: 38px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 130px; height: 22px;
+    background: #111827;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .phone-notch-camera {
+    width: 8px; height: 8px;
+    background: #1F2937;
+    border-radius: 50%;
+  }
+  .phone-header {
+    height: 38px;
+    background: #fff;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    border-bottom: 1px solid #E5E7EB;
+    padding-top: 12px;
+  }
+  .phone-content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  /* Phone Screens States */
+  .p-screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  .p-screen.active {
+    display: flex;
+  }
+
+  /* Screen 1: Zalo Search */
+  .zalo-top {
+    background: var(--zalo-blue);
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .zalo-search-bar {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+  }
+  .zalo-search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 13px;
+    width: 100%;
+  }
+  .zalo-search-bar input::placeholder { color: rgba(255,255,255,0.6); }
+  
+  .zalo-results {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .search-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .oa-search-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .oa-search-card:hover {
+    border-color: var(--zalo-blue);
+    background: #F0F7FF;
+  }
+  .oa-search-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+    color: white;
+    font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--brand-accent);
+  }
+  .oa-search-info {
+    flex: 1;
+  }
+  .oa-search-name {
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .oa-search-badge {
+    background: var(--zalo-blue);
+    color: white;
+    font-size: 8px;
+    padding: 1px 4px;
+    border-radius: 4px;
+  }
+  .oa-search-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Screen 2: OA Home */
+  .oa-home-cover {
+    height: 110px;
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
+    position: relative;
+  }
+  .oa-home-profile {
+    padding: 0 16px 16px;
+    background: white;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .oa-home-avatar {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+    border: 3px solid white;
+    position: absolute;
+    top: -34px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .oa-home-details {
+    padding-top: 40px;
+  }
+  .oa-home-name {
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .oa-home-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .oa-home-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .oa-home-stats strong { color: var(--text-primary); }
+  
+  .oa-home-buttons {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: white;
+    margin-top: 10px;
+  }
+  .btn-follow {
+    background: var(--zalo-blue);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 104, 255, 0.2);
+    animation: bounceBtn 1.5s infinite;
+  }
+  @keyframes bounceBtn {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); box-shadow: 0 6px 16px rgba(0, 104, 255, 0.3); }
+  }
+
+  .oa-home-menu {
+    padding: 16px;
+    background: white;
+    margin-top: 10px;
+    flex: 1;
+  }
+  .oa-menu-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .oa-menu-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Screen 3: OA Chat */
+  .chat-hdr {
+    background: var(--zalo-blue);
+    padding: 24px 14px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .chat-hdr-back { font-size: 20px; cursor: pointer; }
+  .chat-hdr-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .chat-hdr-info { flex: 1; }
+  .chat-hdr-name { font-size: 13px; font-weight: 700; }
+  .chat-hdr-status { font-size: 9px; opacity: 0.8; }
+  
+  .chat-msgs {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    background: #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chat-input-box {
+    background: white;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid var(--border-color);
+  }
+  .chat-input-field {
+    flex: 1;
+    background: #F3F4F6;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 12px;
+    outline: none;
+  }
+  .chat-send-btn {
+    width: 30px; height: 30px;
+    background: var(--zalo-blue);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  /* Chat elements */
+  .p-msg {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .p-msg.bot {
+    background: white;
+    color: var(--text-primary);
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .p-msg.user {
+    background: var(--zalo-blue);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .p-msg.system {
+    align-self: center;
+    background: #E9D8FF;
+    color: #5B21B6;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    max-width: 90%;
+  }
+  .p-typing {
+    display: flex; gap: 4px; align-items: center;
+    background: white; border-radius: 12px;
+    padding: 8px 12px; align-self: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-bottom-left-radius: 3px;
+  }
+  .p-typing-dot {
+    width: 5px; height: 5px; background: var(--text-muted);
+    border-radius: 50%; animation: typingDot 1.2s infinite;
+  }
+  .p-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .p-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingDot { 0%, 80%, 100% { transform: scale(1); opacity: 0.4; } 40% { transform: scale(1.25); opacity: 1; } }
+
+  .p-quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+    align-self: flex-start;
+  }
+  .p-qr-btn {
+    background: white;
+    border: 1.5px solid var(--zalo-blue);
+    color: var(--zalo-blue);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .p-qr-btn:hover {
+    background: var(--zalo-blue);
+    color: white;
+  }
+
+  /* MiniApp Card in Chat */
+  .p-miniapp-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    width: 230px;
+    align-self: flex-start;
+    animation: fadeIn 0.3s;
+  }
+  .p-ma-hdr {
+    background: var(--brand-primary);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+  }
+  .p-ma-hdr-logo { font-size: 14px; }
+  .p-ma-hdr-title { font-size: 11px; font-weight: 700; }
+  .p-ma-body { padding: 12px; text-align: center; }
+  .p-ma-title { font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .p-ma-desc { font-size: 10px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 10px; }
+  .p-ma-btn {
+    background: var(--brand-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  /* Mini App Mockup Overlaid */
+  .miniapp-overlay {
+    position: absolute;
+    bottom: -100%; left: 0; right: 0;
+    height: 85%;
+    background: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 200;
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.15);
+    transition: bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .miniapp-overlay.active {
+    bottom: 0;
+  }
+  .miniapp-hdr {
+    background: var(--brand-primary);
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .ma-title-box { display: flex; align-items: center; gap: 8px; }
+  .ma-logo { font-size: 18px; }
+  .ma-name { font-size: 13px; font-weight: 800; }
+  .ma-sub { font-size: 9px; opacity: 0.8; }
+  .ma-close { font-size: 18px; cursor: pointer; opacity: 0.8; }
+  
+  .miniapp-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+  }
+  .ma-promo-banner {
+    background: linear-gradient(135deg, var(--brand-accent) 0%, #F59E0B 100%);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .ma-promo-title { font-size: 13px; font-weight: 800; color: #1F2937; }
+  .ma-promo-sub { font-size: 10px; color: #78350F; margin-top: 2px; }
+
+  .ma-section-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .ma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .ma-combo-card {
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ma-combo-card.selected {
+    border-color: var(--brand-primary);
+    background: #EBF3FB;
+  }
+  .combo-emoji { font-size: 20px; }
+  .combo-name { font-size: 11px; font-weight: 700; margin-top: 4px; }
+  .combo-price { font-size: 10px; color: var(--brand-primary); font-weight: 600; }
+
+  .ma-form { display: flex; flex-direction: column; gap: 8px; }
+  .ma-input {
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    outline: none;
+  }
+  .ma-input:focus { border-color: var(--brand-primary); }
+  
+  .ma-optin-box {
+    background: var(--bg-main);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid var(--border-color);
+  }
+  .ma-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 10.5px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  .ma-checkbox-label input { margin-top: 2px; }
+  
+  .ma-submit-btn {
+    background: var(--brand-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(227, 24, 55, 0.15);
+  }
+
+  /* Tab 2 Instructions Panel */
+  .instructions-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .guide-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  }
+  .guide-card h3 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .guide-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .guide-step:hover { background: var(--bg-main); }
+  .guide-step.active {
+    background: #F0F6FF;
+    border-color: #BFDBFE;
+  }
+  .guide-step.done {
+    background: #ECFDF5;
+  }
+  .guide-step.done .gs-num {
+    background: var(--success);
+    color: white;
+  }
+  .gs-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--border-color);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .guide-step.active .gs-num {
+    background: var(--zalo-blue);
+    color: white;
+  }
+  .gs-text { flex: 1; }
+  .gs-title { font-size: 13px; font-weight: 700; }
+  .gs-desc { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+  /* CRM Real-time Sync Status Widget */
+  .crm-sync-widget {
+    background: #E8F4FF;
+    border: 1px solid #FDE68A;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .crm-sync-hdr {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px; font-size: 12px; font-weight: 700; color: #B45309;
+  }
+  .crm-sync-dot {
+    width: 8px; height: 8px; background: #B45309; border-radius: 50%;
+  }
+  .crm-sync-dot.active {
+    background: var(--success);
+    animation: pulse 1s infinite;
+  }
+  .crm-sync-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11.5px;
+  }
+  .crm-sync-item {
+    background: white; border-radius: 8px; padding: 10px; border: 1px solid #FEF3C7;
+  }
+  .crm-sync-lbl { color: var(--text-muted); font-size: 10px; margin-bottom: 2px; }
+  .crm-sync-val { font-weight: 700; color: var(--text-primary); }
+
+  /* ─── TAB 3: OPERATIONS WORKFLOW (3-LANES) ─── */
+  .ops-banner {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    margin-bottom: 24px;
+  }
+  .ops-banner-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+  .ops-arch { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .ops-node { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 90px; }
+  .ops-icon {
+    width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  .ops-lbl { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.3; }
+  .ops-sublbl { font-size: 9.5px; color: var(--text-muted); text-align: center; }
+  .ops-arr { font-size: 20px; color: var(--text-muted); font-weight: 300; }
+  .ops-badge-v {
+    position: absolute; bottom: -3px; right: -3px; width: 16px; height: 16px; background: var(--brand-accent);
+    color: #1F2937; border-radius: 50%; font-size: 8px; font-weight: 800; display: flex; align-items: center; justify-content: center; border: 2px solid white;
+  }
+  .ops-split { display: flex; flex-direction: column; gap: 6px; }
+
+  .ops-progress-wrap { margin-top: 14px; }
+  .ops-progress-hdr { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary); font-weight: 600; margin-bottom: 6px; }
+  .ops-progress-track { height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
+  .ops-progress-fill { height: 100%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); border-radius: 10px; width: 16.6%; transition: width 0.4s ease; }
+
+  .ops-step-nav { display: flex; gap: 6px; margin-bottom: 20px; overflow-x: auto; padding: 2px; }
+  .ops-step-btn {
+    flex: 1; padding: 10px 6px; text-align: center; border-radius: 10px; cursor: pointer; font-size: 11px;
+    font-weight: 700; color: var(--text-secondary); background: white; border: 1px solid var(--border-color); transition: all 0.2s; min-width: 90px;
+  }
+  .ops-step-btn.active { background: var(--zalo-blue); color: white; border-color: var(--zalo-blue); box-shadow: 0 4px 12px rgba(0, 104, 255, 0.2); }
+  .ops-step-btn.done { color: var(--zalo-blue); border-color: #BFDBFE; background: #F0F7FF; }
+  .ops-step-btn .sn { font-size: 14px; font-weight: 900; display: block; margin-bottom: 2px; }
+
+  .ops-stage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; min-height: 380px; }
+  .ops-lane {
+    background: white; border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02); display: flex; flex-direction: column; transition: all 0.3s;
+  }
+  .ops-lane.highlight { border-color: var(--zalo-blue); box-shadow: 0 0 0 3px rgba(0,104,255,0.1), 0 8px 30px rgba(0,104,255,0.06); }
+  .ops-lane-hdr { padding: 14px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border-color); background: #FAFBFD; }
+  .ops-lane-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .ops-lane-info { flex: 1; }
+  .ops-lane-name { font-size: 13.5px; font-weight: 750; color: var(--text-primary); }
+  .ops-lane-role { font-size: 10px; color: var(--text-muted); margin-top: 1px; font-weight: 500; }
+  .ops-lane-body { padding: 16px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+  
+  /* Operations messages custom layout */
+  .ops-msg { display: flex; gap: 8px; max-width: 85%; animation: msgIn 0.3s ease; }
+  .ops-msg.out { flex-direction: row-reverse; align-self: flex-end; }
+  .ops-msg-avatar { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .ops-msg-bubble { padding: 8px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5; word-wrap: break-word; }
+  .ops-msg.in .ops-msg-bubble { background: #F3F4F6; color: var(--text-primary); border-top-left-radius: 3px; }
+  .ops-msg.out .ops-msg-bubble { background: var(--zalo-blue); color: white; border-top-right-radius: 3px; }
+  .ops-msg.system { align-self: center; max-width: 90%; }
+  .ops-msg.system .ops-msg-bubble { background: #E8F4FF; color: #B45309; border: 1px solid #FDE68A; border-radius: 10px; font-size: 11px; text-align: center; }
+  .ops-msg.success { align-self: center; max-width: 90%; }
+  .ops-msg.success .ops-msg-bubble { background: var(--success-light); color: #065F46; border: 1px solid #A7F3D0; border-radius: 10px; font-size: 11px; text-align: center; }
+  .ops-msg.tagging { align-self: center; max-width: 95%; }
+  .ops-msg.tagging .ops-msg-bubble { background: #EEF2F6; color: #1E3A8A; border: 1px dashed #BFDBFE; border-radius: 10px; font-size: 11px; text-align: center; }
+  .ops-msg-sender { font-size: 9.5px; font-weight: 700; color: var(--zalo-blue); margin-bottom: 2px; }
+  
+  /* Ticket & widgets inside lane */
+  .ops-ticket { background: #F0F6FF; border: 1.5px solid #BFDBFE; border-radius: 12px; padding: 12px; font-size: 11.5px; align-self: stretch; animation: msgIn 0.3s; }
+  .ops-ticket-title { font-weight: 800; color: var(--zalo-dark); margin-bottom: 6px; font-size: 12.5px; }
+  .ops-ticket-row { display: flex; justify-content: space-between; margin-bottom: 4px; color: var(--text-secondary); }
+  .ops-ticket-val { font-weight: 700; color: var(--text-primary); }
+  
+  .ops-tags-widget { display: flex; flex-wrap: wrap; gap: 4px; padding: 10px; background: #FAFBFD; border: 1px dashed #BFDBFE; border-radius: 10px; align-self: stretch; animation: msgIn 0.3s; }
+  .ops-tags-widget-title { font-size: 9.5px; font-weight: 700; color: var(--zalo-blue); width: 100%; margin-bottom: 4px; text-transform: uppercase; }
+
+  .ops-gmf-widget { background: linear-gradient(135deg, var(--zalo-blue) 0%, var(--zalo-dark) 100%); color: white; border-radius: 12px; padding: 12px; font-size: 11px; align-self: stretch; animation: msgIn 0.3s; }
+  .ops-gmf-title { font-weight: 800; font-size: 12.5px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .ops-gmf-members { display: flex; margin-bottom: 6px; margin-top: 6px; }
+  .ops-gmf-avatar { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 10px; border: 2.5px solid #0068ff; margin-left: -5px; }
+  .ops-gmf-avatar:first-child { margin-left: 0; }
+
+  .ops-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; background: white; padding: 16px 24px; border-radius: 14px; border: 1px solid var(--border-color); }
+  .ops-desc-box { text-align: center; flex: 1; padding: 0 20px; }
+  .ops-step-title { font-size: 15px; font-weight: 800; color: var(--text-primary); }
+  .ops-step-desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+  /* Buttons */
+  .btn { padding: 10px 24px; border-radius: 10px; font-size: 13.5px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--zalo-blue); color: white; }
+  .btn-primary:hover { background: var(--zalo-blue-hover); }
+  .btn-ghost { background: var(--bg-main); color: var(--text-secondary); border: 1px solid var(--border-color); }
+  .btn-ghost:hover { background: var(--border-color); }
+
+  /* ─── TAB 4: CRM & TAGGING ─── */
+  .crm-layout { display: grid; grid-template-columns: 360px 1fr; gap: 24px; }
+  .crm-panel { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .crm-panel-title { font-size: 15px; font-weight: 850; margin-bottom: 4px; }
+  .crm-panel-sub { font-size: 11.5px; color: var(--text-muted); margin-bottom: 18px; }
+
+  /* OA Inbox Inbox List */
+  .crm-inbox { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+  .crm-inbox-topbar { background: var(--zalo-blue); padding: 12px 16px; color: white; }
+  .crm-inbox-title { font-size: 13px; font-weight: 700; }
+  .crm-inbox-sub { font-size: 10px; opacity: 0.8; margin-top: 2px; }
+  
+  .crm-filters { background: #FAFBFD; padding: 8px 12px; display: flex; gap: 6px; overflow-x: auto; border-bottom: 1px solid var(--border-color); }
+  .crm-filters::-webkit-scrollbar { display: none; }
+  .crm-filter-chip { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid var(--border-color); background: white; color: var(--text-secondary); white-space: nowrap; transition: all 0.15s; }
+  .crm-filter-chip.active { background: var(--zalo-blue); color: white; border-color: var(--zalo-blue); }
+
+  .crm-convo-list { display: flex; flex-direction: column; background: white; }
+  .crm-convo { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #FAFBFD; cursor: pointer; transition: background 0.15s; }
+  .crm-convo:hover { background: #FAFBFD; }
+  .crm-convo.active { background: #EFF5FF; }
+  .crm-avatar-box { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .crm-convo-info { flex: 1; min-width: 0; }
+  .crm-convo-name { font-size: 12.5px; font-weight: 750; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .crm-convo-preview { font-size: 11.5px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+  .crm-convo-tags { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 6px; }
+  .crm-convo-meta { text-align: right; flex-shrink: 0; }
+  .crm-convo-time { font-size: 9.5px; color: var(--text-muted); }
+  .crm-convo-unread { width: 16px; height: 16px; background: var(--brand-primary); color: white; border-radius: 50%; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 4px; margin-left: auto; }
+
+  /* Tag styles */
+  .tag-pill { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 10px; font-size: 9.5px; font-weight: 700; border: 1px solid transparent; }
+  .tag-process { background: #FEF3C7; color: #D97706; border-color: #FDE68A; }
+  .tag-process.green { background: var(--success-light); color: #059669; border-color: #A7F3D0; }
+  .tag-branch { background: #EFF5FF; color: #2563EB; border-color: #BFDBFE; }
+  .tag-need { background: #F3E8FF; color: #7C3AED; border-color: #E9D5FF; }
+  .tag-loyalty { background: #E8F4FF; color: #D97706; border-color: #FEF3C7; }
+
+  /* Customer Details Sheet */
+  .crm-sheet { display: flex; flex-direction: column; gap: 20px; }
+  .crm-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .crm-sheet-hdr { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+  
+  .crm-profile-hdr { display: flex; align-items: center; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--border-color); }
+  .crm-profile-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--brand-primary); color: white; font-size: 26px; border: 2.5px solid var(--brand-accent); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+  .crm-profile-name { font-size: 16px; font-weight: 800; }
+  .crm-profile-meta { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  
+  .crm-profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  .crm-profile-row { display: flex; flex-direction: column; gap: 3px; }
+  .crm-profile-lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+  .crm-profile-val { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+
+  .crm-tags-manager { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 18px; }
+  .crm-tag-group-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; }
+  .crm-tag-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ─── TAB 5: HQ DASHBOARD ─── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 24px; }
+  .kpi-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .kpi-card-icon { font-size: 22px; margin-bottom: 8px; }
+  .kpi-card-val { font-size: 26px; font-weight: 900; color: var(--text-primary); line-height: 1.1; }
+  .kpi-card-lbl { font-size: 12px; color: var(--text-secondary); font-weight: 600; margin-top: 2px; }
+  .kpi-card-delta { font-size: 11px; font-weight: 700; margin-top: 6px; display: flex; align-items: center; gap: 3px; }
+  .kpi-up { color: var(--success); }
+  
+  .db-chart-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .db-chart-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .db-chart-card h3 { font-size: 14.5px; font-weight: 800; margin-bottom: 4px; }
+  .db-chart-sub { font-size: 11px; color: var(--text-muted); margin-bottom: 16px; }
+  .db-chart-wrap { position: relative; height: 210px; }
+  .db-chart-legend { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+  .db-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+  .db-legend-color { width: 16px; height: 4px; border-radius: 2px; }
+
+  .db-grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .db-chart-wrap-sm { position: relative; height: 180px; }
+
+  /* Store Table */
+  .db-table-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .db-table-card h3 { font-size: 15px; font-weight: 850; margin-bottom: 16px; }
+  .db-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+  .db-table th { padding: 12px 16px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; border-bottom: 1px solid var(--border-color); background: #FAFBFD; }
+  .db-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
+  .db-table tr:hover td { background: #FAFBFD; }
+  .db-table td strong { color: var(--text-primary); }
+  .db-perf-bar { height: 6px; border-radius: 3px; background: var(--border-color); overflow: hidden; width: 100px; }
+  .db-perf-fill { height: 100%; border-radius: 3px; background: var(--zalo-blue); }
+  .db-status-pill { padding: 3px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 700; }
+  .db-pill-active { background: var(--success-light); color: #065F46; }
+  .db-pill-warning { background: #E8F4FF; color: #B45309; }
+
+  /* ─── TAB 6: CAMPAIGN & ZBS TEMPLATE ─── */
+  .zbs-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; }
+  .zbs-form-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .zbs-form-title { font-size: 16px; font-weight: 850; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .zbs-badge { background: #EFF5FF; color: var(--zalo-blue); font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
+
+  .fg { margin-bottom: 16px; }
+  .fg-lbl { font-size: 12px; font-weight: 750; color: var(--text-primary); margin-bottom: 8px; display: block; }
+  .fg-input, .fg-select, .fg-textarea { width: 100%; border: 1.5px solid var(--border-color); border-radius: 8px; padding: 10px 14px; font-size: 13px; outline: none; background: #FAFBFD; color: var(--text-primary); font-family: inherit; transition: all 0.2s; }
+  .fg-input:focus, .fg-select:focus, .fg-textarea:focus { border-color: var(--zalo-blue); background: white; }
+  .fg-textarea { resize: vertical; min-height: 80px; }
+
+  .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .seg-card { border: 2px solid var(--border-color); border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s; display: flex; gap: 10px; align-items: flex-start; }
+  .seg-card.selected { border-color: var(--zalo-blue); background: #F0F6FF; }
+  .seg-icon { font-size: 18px; margin-top: 1px; }
+  .seg-details { flex: 1; }
+  .seg-title { font-size: 12px; font-weight: 750; }
+  .seg-num { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .seg-tag { font-size: 9.5px; color: var(--zalo-blue); font-weight: 700; margin-top: 2px; }
+
+  .send-method-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .method-btn {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #FAFBFD;
+  }
+  .method-btn:hover {
+    border-color: var(--zalo-blue);
+    background: #F8FAFC;
+  }
+  .method-btn.active {
+    border-color: var(--zalo-blue);
+    background: #F0F6FF;
+    box-shadow: 0 4px 12px rgba(0, 104, 255, 0.08);
+  }
+  .method-icon {
+    font-size: 16px;
+    background: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+  }
+  .method-btn.active .method-icon {
+    border-color: var(--zalo-blue);
+    color: var(--zalo-blue);
+  }
+  .method-info {
+    flex: 1;
+  }
+  .method-title {
+    font-size: 11.5px;
+    font-weight: 750;
+    color: var(--text-primary);
+  }
+  .method-desc {
+    font-size: 9px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+
+  .zbs-reach-card { background: linear-gradient(135deg, var(--zalo-blue) 0%, var(--zalo-dark) 100%); color: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 4px 14px rgba(0, 104, 255, 0.25); }
+  .zbs-reach-lbl { font-size: 11px; opacity: 0.8; margin-bottom: 4px; }
+  .zbs-reach-val { font-size: 28px; font-weight: 900; }
+  .zbs-reach-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+
+  .zbs-send-btn { width: 100%; background: var(--brand-primary); color: white; border: none; border-radius: 10px; padding: 14px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(227, 24, 55, 0.15); display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .zbs-send-btn:hover { background: var(--brand-primary-hover); transform: translateY(-1px); }
+
+  .zbs-preview-panel { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.02); position: sticky; top: 150px; }
+  .zbs-preview-title { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+  
+  .preview-phone-card { background: #E5E7EB; border-radius: 16px; padding: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .preview-zalo-msg { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .preview-zalo-hdr { background: var(--brand-primary); padding: 10px 12px; display: flex; align-items: center; gap: 8px; color: white; }
+  .preview-zalo-logo { width: 28px; height: 28px; border-radius: 6px; background: white; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .preview-zalo-brand { font-size: 11.5px; font-weight: 700; }
+  .preview-zalo-type { font-size: 8.5px; opacity: 0.7; margin-top: 1px; }
+  .preview-zalo-body { padding: 12px; }
+  .preview-zalo-title { font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+  .preview-zalo-content { font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px; white-space: pre-line; }
+  .preview-zalo-btn { background: var(--brand-primary); color: white; border: none; border-radius: 6px; padding: 8px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; }
+
+  .sent-notification-box { display: none; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; border-radius: 16px; padding: 24px; text-align: center; margin-top: 16px; box-shadow: 0 4px 16px rgba(5, 150, 105, 0.2); animation: fadeIn 0.4s ease; }
+  .sent-notification-icon { font-size: 36px; margin-bottom: 8px; }
+  .sent-notification-title { font-size: 16px; font-weight: 850; margin-bottom: 6px; }
+  .sent-notification-sub { font-size: 11.5px; opacity: 0.85; margin-bottom: 16px; }
+  .sent-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .sent-stat-card { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 8px; text-align: center; }
+  .sent-stat-val { font-size: 16px; font-weight: 800; }
+  .sent-stat-lbl { font-size: 9px; opacity: 0.8; margin-top: 2px; }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: #1F2937;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.5; }
+  }
+
+  /* Responsive styling */
+  @media (max-width: 1024px) {
+    .experience-layout, .ops-stage, .crm-layout, .zbs-layout, .broadcast-layout {
+      grid-template-columns: 1fr;
+    }
+    .kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .db-chart-row, .db-grid-3col {
+      grid-template-columns: 1fr;
+    }
+    .main-content {
+      padding: 16px;
+    }
+  }
+
+  /* ─── OA HOME QUICK MENU ─── */
+  .oa-home-btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 4px 16px 12px;
+    background: white;
+  }
+  .btn-chat-oa {
+    background: white;
+    color: var(--zalo-blue);
+    border: 2px solid var(--zalo-blue);
+    border-radius: 20px;
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .oa-quick-menu-grid {
+    padding: 10px 14px 12px;
+    background: white;
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    border-top: 1px solid var(--border-color);
+  }
+  .oa-quick-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid var(--border-color);
+    background: #FAFBFD;
+  }
+  .oa-quick-tile:hover { background: #F0F6FF; border-color: var(--zalo-blue); }
+  .oa-quick-tile-icon { font-size: 19px; }
+  .oa-quick-tile-label { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); text-align: center; line-height: 1.3; }
+  .oa-quick-tile.highlight { border-color: var(--brand-primary); background: #EBF3FB; }
+  .oa-quick-tile.highlight .oa-quick-tile-label { color: var(--brand-primary); }
+
+  /* ─── CHAT QUICK MENU BAR ─── */
+  .chat-quick-menu-bar {
+    background: white;
+    border-top: 1px solid var(--border-color);
+    padding: 8px 10px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chat-quick-menu-bar.visible { display: flex; }
+  .chat-menu-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: #FAFBFD;
+    transition: all 0.2s;
+    min-width: 58px;
+  }
+  .chat-menu-tile:hover { background: #F0F6FF; border-color: var(--zalo-blue); }
+  .chat-menu-tile.highlight { border-color: var(--brand-primary); background: #EBF3FB; }
+  .chat-menu-tile-icon { font-size: 17px; }
+  .chat-menu-tile-label { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); text-align: center; line-height: 1.3; }
+  .chat-menu-tile.highlight .chat-menu-tile-label { color: var(--brand-primary); }
+  .chat-menu-toggle-btn {
+    width: 28px; height: 28px;
+    background: #F3F4F6;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .chat-menu-toggle-btn:hover { background: #E5E7EB; }
+  .chat-menu-toggle-btn.open { background: var(--zalo-blue); color: white; border-color: var(--zalo-blue); }
+
+  /* ─── ZBS SOLUTION TABS ─── */
+  .zbs-sol-tabs {
+    display: flex;
+    background: white;
+    border-radius: 16px 16px 0 0;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    overflow: hidden;
+  }
+  .zbs-sol-tab {
+    flex: 1;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 3px solid transparent;
+    background: #FAFBFD;
+    transition: all 0.2s;
+    justify-content: center;
+  }
+  .zbs-sol-tab:hover { color: var(--zalo-blue); background: #F0F6FF; }
+  .zbs-sol-tab.active { color: var(--zalo-blue); background: white; border-bottom-color: var(--zalo-blue); }
+  .zbs-sol-tab .tab-badge {
+    background: #EFF5FF;
+    color: var(--zalo-blue);
+    font-size: 9.5px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+  .zbs-sol-pane { display: none; }
+  .zbs-sol-pane.active { display: block; }
+  .zbs-connected-card {
+    border-radius: 0 0 16px 16px !important;
+    border-top: none !important;
+  }
+
+  /* ZBS use case chips */
+  .usecase-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .usecase-tab {
+    padding: 6px 13px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border-color);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--text-secondary);
+    background: #FAFBFD;
+    transition: all 0.2s;
+  }
+  .usecase-tab:hover { border-color: var(--zalo-blue); color: var(--zalo-blue); }
+  .usecase-tab.active { background: var(--zalo-blue); color: white; border-color: var(--zalo-blue); }
+
+  /* Broadcast section */
+  .broadcast-layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+  .broadcast-target-options { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .broadcast-target-opt {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .broadcast-target-opt.selected { border-color: var(--zalo-blue); background: #F0F6FF; }
+  .broadcast-target-opt .opt-icon { font-size: 17px; margin-top: 1px; }
+  .broadcast-target-opt .opt-body { flex: 1; }
+  .broadcast-target-opt .opt-title { font-size: 13px; font-weight: 750; }
+  .broadcast-target-opt .opt-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+  .broadcast-target-opt .opt-radio {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    margin-top: 2px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .broadcast-target-opt.selected .opt-radio { border-color: var(--zalo-blue); background: var(--zalo-blue); box-shadow: inset 0 0 0 3px white; }
+  .adv-filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .adv-filter-row { display: flex; flex-direction: column; gap: 3px; }
+  .adv-filter-row label { font-size: 10.5px; font-weight: 700; color: var(--text-secondary); }
+  .adv-filter-row select { border: 1.5px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 11.5px; outline: none; background: white; }
+  .broadcast-stats-row { display: flex; gap: 10px; margin-top: 12px; }
+  .broadcast-stat { flex: 1; background: var(--bg-main); border-radius: 10px; padding: 10px; text-align: center; }
+  .broadcast-stat .val { font-size: 19px; font-weight: 900; color: var(--zalo-blue); }
+  .broadcast-stat .lbl { font-size: 9.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+  .broadcast-send-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--zalo-blue) 0%, var(--zalo-dark) 100%);
+    color: white; border: none; border-radius: 10px; padding: 14px; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,104,255,0.25);
+    display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px;
+  }
+  .broadcast-send-btn:hover { transform: translateY(-1px); }
+
+  /* ─── RESPONSIVE: TABLET (768px and below) ─── */
+  @media (max-width: 768px) {
+    body { font-size: 14px; }
+    .hdr { padding: 12px 16px; }
+    .hdr-logo-brand { font-size: 18px; }
+    .main-content { margin-top: 130px; padding: 16px; }
+    .welcome-hero { padding: 32px 24px; }
+    .hero-title { font-size: 28px; }
+    .hero-sub { font-size: 14px; }
+    .hero-stats { gap: 24px; }
+    .grid-2col { grid-template-columns: 1fr; }
+    .experience-layout { grid-template-columns: 1fr; gap: 16px; }
+    .phone-container { position: relative; top: auto; }
+    .phone-body { width: 300px; height: 600px; }
+    .instructions-panel { margin-top: 16px; }
+    .fg-input, .fg-select, .fg-textarea { font-size: 16px; padding: 10px; }
+    .seg-grid { grid-template-columns: 1fr; }
+    .send-method-toggle { grid-template-columns: 1fr; }
+    .zbs-layout, .broadcast-layout { grid-template-columns: 1fr; gap: 16px; }
+    .zbs-form-card, .zbs-preview-panel { position: relative; top: auto; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .db-chart { height: 200px; }
+    button, input, select { min-height: 44px; font-size: 16px; }
+  }
+
+  /* ─── RESPONSIVE: MOBILE (480px and below) ─── */
+  @media (max-width: 480px) {
+    body { font-size: 13px; }
+    .hdr { padding: 10px 12px; }
+    .hdr-logo-brand { font-size: 16px; }
+    .hdr-logo-zalo { font-size: 12px; }
+    .tab-btn { padding: 10px 12px; font-size: 12px; }
+    .main-content { margin-top: 130px; padding: 12px; }
+    .welcome-hero { padding: 20px 16px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 1.5px; text-align: center; }
+    .hero-title { font-size: 22px; text-align: center; max-width: 100%; }
+    .hero-sub { font-size: 13px; text-align: center; }
+    .hero-stats { flex-direction: column; align-items: center; gap: 12px; padding-top: 12px; }
+    .hero-stat { text-align: center; border: none; padding: 8px 0; }
+    .hero-stat .num { font-size: 20px; }
+    .hero-stat .lbl { font-size: 10px; }
+    .panel-card-intro { padding: 16px; }
+    .panel-card-intro h3 { font-size: 16px; }
+    .problem-item, .solution-item { padding: 12px; }
+    .problem-item .icon { font-size: 18px; }
+    .problem-item h4 { font-size: 13px; }
+    .problem-item p { font-size: 12px; }
+
+    .phone-body { width: 280px; height: 560px; border-radius: 40px; padding: 10px; }
+    .phone-header { height: 36px; font-size: 11px; }
+    .guide-card { padding: 16px; }
+    .guide-card h3 { font-size: 14px; }
+    .guide-step { padding: 10px; }
+    .gs-num { width: 24px; height: 24px; font-size: 12px; }
+    .gs-title { font-size: 12px; }
+    .gs-desc { font-size: 11px; }
+
+    .crm-sync-widget { padding: 14px; }
+    .crm-sync-hdr { font-size: 11px; }
+    .crm-sync-grid { grid-template-columns: 1fr; }
+    .crm-sync-lbl { font-size: 10px; }
+
+    .ops-banner { padding: 16px 12px; }
+    .ops-banner-title { font-size: 14px; }
+    .ops-arch { gap: 6px; }
+    .ops-lbl { font-size: 11px; }
+
+    .kpi-grid { grid-template-columns: 1fr; }
+    .kpi-val { font-size: 18px; }
+    .db-chart { height: 150px; }
+    .db-table { font-size: 11px; }
+
+    .zbs-form-title { font-size: 14px; }
+    .zbs-badge { font-size: 9px; }
+    .fg-lbl { font-size: 12px; }
+    .fg-input, .fg-select, .fg-textarea { font-size: 16px; padding: 10px; border-radius: 6px; }
+    .fg-textarea { height: 80px; }
+
+    .usecase-tabs { gap: 3px; }
+    .usecase-tab { padding: 5px 8px; font-size: 10px; }
+    .seg-card { padding: 8px; }
+    .seg-title { font-size: 11px; }
+
+    .method-btn { padding: 8px; }
+    .method-icon { width: 28px; height: 28px; font-size: 14px; }
+    .method-title { font-size: 10px; }
+
+    .zbs-reach-val { font-size: 24px; }
+    .zbs-send-btn { padding: 12px; font-size: 12px; }
+
+    .zbs-preview-panel { padding: 14px; }
+    .zbs-preview-title { font-size: 9px; }
+    .preview-phone-card { padding: 10px; }
+    .preview-zalo-hdr { padding: 8px 10px; }
+    .preview-zalo-brand { font-size: 10px; }
+    .preview-zalo-body { padding: 10px; }
+    .preview-zalo-title { font-size: 11px; }
+    .preview-zalo-content { font-size: 10px; }
+    .preview-zalo-btn { padding: 8px; font-size: 11px; }
+
+    .broadcast-target-opt { padding: 8px; }
+    .broadcast-target-opt .opt-title { font-size: 12px; }
+    .broadcast-target-opt .opt-desc { font-size: 9px; }
+
+    .adv-filter-row label { font-size: 10px; }
+    .adv-filter-row select { font-size: 11px; padding: 6px 8px; }
+
+    .broadcast-stat .val { font-size: 16px; }
+    .broadcast-stat .lbl { font-size: 8px; }
+
+    .sent-notification-box { padding: 12px; }
+    .sent-notification-title { font-size: 13px; }
+    .sent-stat-val { font-size: 16px; }
+
+    .oa-home-btn-row { grid-template-columns: 1fr; padding: 4px 14px 10px; }
+    .btn-follow, .btn-chat-oa { font-size: 12px; padding: 10px; }
+    .oa-quick-menu-grid { padding: 8px 12px 10px; gap: 4px; }
+    .oa-quick-tile { padding: 6px; }
+    .oa-quick-tile-icon { font-size: 17px; }
+    .oa-quick-tile-label { font-size: 8px; }
+
+    .chat-quick-menu-bar { padding: 6px 8px; gap: 4px; }
+    .chat-menu-tile { padding: 5px 8px; }
+    .chat-menu-tile-icon { font-size: 15px; }
+    .chat-menu-tile-label { font-size: 7.5px; }
+  }
+
+  /* ─── RESPONSIVE: EXTRA SMALL (360px and below) ─── */
+  @media (max-width: 360px) {
+    .hdr { padding: 8px 10px; }
+    .hdr-logo-brand { font-size: 14px; }
+    .phone-body { width: 260px; height: 520px; }
+    .hero-title { font-size: 18px; }
+    .oa-quick-menu-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ─── RESPONSIVE: TABLET (768px and below) ─── */
+  @media (max-width: 768px) {
+    body { font-size: 14px; }
+    .hdr { padding: 12px 16px; }
+    .main-content { margin-top: 130px; padding: 16px; }
+    .welcome-hero { padding: 32px 24px; }
+    .hero-title { font-size: 28px; }
+    .grid-2col { grid-template-columns: 1fr; }
+    .experience-layout { grid-template-columns: 1fr; gap: 16px; }
+    .phone-body { width: 300px; height: 600px; }
+    .fg-input, .fg-select, .fg-textarea { font-size: 16px; padding: 10px; }
+    .seg-grid { grid-template-columns: 1fr; }
+    .send-method-toggle { grid-template-columns: 1fr; }
+    .zbs-layout, .broadcast-layout { grid-template-columns: 1fr; gap: 16px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    button, input, select { min-height: 44px; font-size: 16px; }
+  }
+
+  /* ─── RESPONSIVE: MOBILE (480px and below) ─── */
+  @media (max-width: 480px) {
+    body { font-size: 13px; }
+    .hdr { padding: 10px 12px; }
+    .hdr-logo-brand { font-size: 16px; }
+    .tab-btn { padding: 10px 12px; font-size: 12px; }
+    .main-content { margin-top: 130px; padding: 12px; }
+    .welcome-hero { padding: 20px 16px; }
+    .hero-title { font-size: 22px; }
+    .hero-stat .num { font-size: 20px; }
+    .panel-card-intro { padding: 16px; }
+    .panel-card-intro h3 { font-size: 16px; }
+    .problem-item, .solution-item { padding: 12px; }
+
+    .phone-body { width: 280px; height: 560px; border-radius: 40px; padding: 10px; }
+    .guide-card { padding: 16px; }
+    .guide-card h3 { font-size: 14px; }
+    .crm-sync-grid { grid-template-columns: 1fr; }
+    .ops-banner { padding: 16px 12px; }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .db-chart { height: 150px; }
+
+    .zbs-form-title { font-size: 14px; }
+    .fg-input, .fg-select, .fg-textarea { font-size: 16px; padding: 10px; border-radius: 6px; }
+    .usecase-tabs { gap: 3px; }
+    .usecase-tab { padding: 5px 8px; font-size: 10px; }
+    .seg-card { padding: 8px; }
+    .send-method-toggle { grid-template-columns: 1fr; }
+
+    .zbs-send-btn { padding: 12px; font-size: 12px; }
+    .zbs-preview-panel { padding: 14px; }
+    .preview-zalo-title { font-size: 11px; }
+    .preview-zalo-content { font-size: 10px; }
+
+    .broadcast-target-opt { padding: 8px; }
+    .broadcast-stat .val { font-size: 16px; }
+
+    .hero-eyebrow { text-align: center; }
+    .hero-title { text-align: center; }
+    .hero-sub { text-align: center; }
+    .hero-stats { gap: 8px; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+
+    .oa-home-btn-row { grid-template-columns: 1fr; padding: 4px 14px 10px; }
+    .oa-quick-menu-grid { padding: 8px 12px 10px; gap: 4px; }
+    .chat-quick-menu-bar { padding: 6px 8px; gap: 4px; }
+  }
+
+  /* ─── RESPONSIVE: EXTRA SMALL (360px and below) ─── */
+  @media (max-width: 360px) {
+    .hdr { padding: 8px 10px; }
+    .phone-body { width: 260px; height: 520px; }
+    .hero-title { font-size: 18px; }
+  }</style>
+<style>
+  :root { color-scheme: light; box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  .hdr { padding-top: calc(16px + env(safe-area-inset-top, 0px)); }
+  .tabs-container { top: calc(66px + env(safe-area-inset-top, 0px)); }
+  body { background: #F4F6F9; }
+  .grid-2col { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px; }
+  .note-illus { font-size:11px; color:#B45309; background:#FFFBEB; border:1px solid #FDE68A; border-radius:8px; padding:6px 10px; display:inline-block; margin-bottom:14px; }
+  /* FAQ / verify card */
+  .verify-card { background:white; border-radius:16px; border:1px solid var(--border-color); border-left:5px solid var(--zalo-blue); padding:22px 26px; margin-bottom:24px; }
+  .verify-card h3 { font-size:16px; font-weight:850; margin-bottom:10px; }
+  .verify-q { font-size:13px; color:var(--text-secondary); margin-bottom:12px; font-style:italic; }
+  .verify-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .verify-item { background:#F8FAFC; border:1px solid var(--border-color); border-radius:12px; padding:14px; font-size:12.5px; line-height:1.55; color:var(--text-secondary); }
+  .verify-item b { color:var(--text-primary); display:block; margin-bottom:4px; font-size:13px; }
+  .verify-src { font-size:11px; color:var(--text-muted); margin-top:12px; }
+  .verify-src a { color:var(--zalo-blue); }
+  .roadmap { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+  .rm-card { background:white; border:1px solid var(--border-color); border-radius:14px; padding:18px; }
+  .rm-phase { font-size:11px; font-weight:800; color:var(--zalo-blue); text-transform:uppercase; letter-spacing:1px; }
+  .rm-title { font-size:14.5px; font-weight:800; margin:4px 0 8px; }
+  .rm-card ul { padding-left:18px; font-size:12.5px; color:var(--text-secondary); line-height:1.6; }
+  /* brand picker in chat */
+  .brand-pick { background:white; border-radius:12px; padding:8px; align-self:stretch; box-shadow:0 1px 3px rgba(0,0,0,.06); animation: msgIn .3s; }
+  .brand-pick-title { font-size:10.5px; font-weight:800; color:var(--text-muted); padding:2px 4px 6px; text-transform:uppercase; }
+  .brand-row { display:flex; align-items:center; gap:8px; padding:7px 6px; border-radius:8px; cursor:pointer; border:1px solid transparent; }
+  .brand-row:hover { background:#F0F6FF; border-color:#BFDBFE; }
+  .brand-ico { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .brand-name { font-size:11.5px; font-weight:750; }
+  .brand-sub { font-size:9.5px; color:var(--text-muted); }
+  .brand-go { margin-left:auto; font-size:10px; color:var(--zalo-blue); font-weight:800; }
+  .route-card { background:white; border-radius:12px; overflow:hidden; align-self:flex-start; max-width:88%; box-shadow:0 1px 3px rgba(0,0,0,.08); animation: msgIn .3s; }
+  .route-card-body { padding:10px 12px; font-size:11.5px; line-height:1.45; }
+  .route-card-btn { display:block; text-align:center; background:var(--zalo-blue); color:white; font-weight:800; font-size:11.5px; padding:9px; cursor:pointer; }
+  .zbs-msg-card { background:white; border-radius:12px; overflow:hidden; align-self:flex-start; max-width:90%; border:1px solid #BFDBFE; animation: msgIn .3s; }
+  .zbs-msg-hdr { background:#EFF5FF; padding:6px 10px; font-size:9.5px; font-weight:800; color:var(--zalo-blue); display:flex; justify-content:space-between; }
+  .zbs-msg-body { padding:10px 12px; font-size:11.5px; line-height:1.5; }
+  .zbs-msg-body .t { font-weight:800; font-size:12.5px; margin-bottom:4px; }
+  .zbs-msg-row { display:flex; justify-content:space-between; gap:8px; font-size:10.5px; border-top:1px dashed var(--border-color); padding-top:4px; margin-top:4px; }
+  .zbs-msg-row span:first-child { color:var(--text-muted); }
+  .zbs-msg-btns { display:flex; border-top:1px solid var(--border-color); }
+  .zbs-msg-btns div { flex:1; text-align:center; padding:8px; font-size:11px; font-weight:800; color:var(--zalo-blue); cursor:pointer; }
+  .zbs-msg-btns div + div { border-left:1px solid var(--border-color); }
+  .form-overlay { position:absolute; inset:0; background:rgba(0,0,0,.45); display:none; align-items:flex-end; z-index:50; }
+  .form-overlay.show { display:flex; }
+  .form-sheet { background:white; width:100%; border-radius:18px 18px 0 0; padding:16px; animation: msgIn .3s; }
+  .form-sheet h4 { font-size:13.5px; font-weight:850; margin-bottom:4px; }
+  .form-sheet p { font-size:10.5px; color:var(--text-muted); margin-bottom:10px; }
+  .form-sheet input, .form-sheet select { width:100%; border:1.5px solid var(--border-color); border-radius:8px; padding:8px 10px; font-size:12px; margin-bottom:8px; font-family:inherit; }
+  .form-sheet label { font-size:10.5px; display:flex; gap:6px; align-items:flex-start; color:var(--text-secondary); margin-bottom:10px; line-height:1.4; }
+  .form-sheet button { width:100%; background:var(--zalo-blue); color:white; border:none; border-radius:20px; padding:10px; font-weight:800; font-size:12.5px; cursor:pointer; font-family:inherit; }
+  .tech-note { background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:14px 16px; font-size:12px; line-height:1.6; color:#78350F; }
+  .tech-note b { color:#92400E; }
+  /* architecture */
+  .arch-wrap { background:white; border:1px solid var(--border-color); border-radius:16px; padding:24px; margin-bottom:24px; overflow-x:auto; }
+  .arch-wrap h3 { font-size:16px; font-weight:850; margin-bottom:4px; }
+  .arch-sub { font-size:12px; color:var(--text-muted); margin-bottom:18px; }
+  .arch-row { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .arch-node { border:2px solid var(--border-color); border-radius:14px; padding:12px 16px; text-align:center; min-width:170px; background:#FAFBFD; }
+  .arch-node.hq { border-color:var(--zalo-blue); background:#EFF5FF; }
+  .arch-node.new { border-color:#10B981; background:#ECFDF5; position:relative; }
+  .arch-node.new::after { content:'ĐỀ XUẤT MỚI'; position:absolute; top:-9px; right:10px; background:#10B981; color:white; font-size:8.5px; font-weight:800; padding:2px 6px; border-radius:8px; }
+  .arch-node .n { font-size:13px; font-weight:800; }
+  .arch-node .d { font-size:10.5px; color:var(--text-muted); margin-top:2px; }
+  .arch-arrow { text-align:center; font-size:12px; color:var(--text-muted); margin:10px 0; font-weight:700; }
+  .opt-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px; }
+  .opt-card { background:white; border:2px solid var(--border-color); border-radius:16px; padding:20px; }
+  .opt-card.rec { border-color:var(--zalo-blue); }
+  .opt-tag { display:inline-block; font-size:10px; font-weight:800; padding:3px 10px; border-radius:12px; margin-bottom:8px; }
+  .opt-card h4 { font-size:15px; font-weight:850; margin-bottom:8px; }
+  .opt-card p { font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:6px; }
+  .pc { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; font-size:12px; line-height:1.55; }
+  .pc div { background:#F8FAFC; border-radius:10px; padding:10px; color:var(--text-secondary); }
+  .pc b { display:block; margin-bottom:3px; color:var(--text-primary); }
+  .tpl-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .tpl-tab { padding:8px 14px; border:1.5px solid var(--border-color); border-radius:20px; font-size:12px; font-weight:750; cursor:pointer; background:white; }
+  .tpl-tab.active { background:var(--zalo-blue); color:white; border-color:var(--zalo-blue); }
+  .cond-list { list-style:none; font-size:12px; color:var(--text-secondary); line-height:1.6; }
+  .cond-list li { padding:6px 0; border-bottom:1px dashed var(--border-color); }
+  .cond-list li:last-child { border:none; }
+  .mth { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .mth div { border:2px solid var(--border-color); border-radius:12px; padding:12px; cursor:pointer; font-size:11.5px; color:var(--text-secondary); line-height:1.5; }
+  .mth div b { display:block; font-size:13px; color:var(--text-primary); margin-bottom:2px; }
+  .mth div.active { border-color:var(--zalo-blue); background:#EFF5FF; }
+  .bc-box { background:white; border:1px dashed #CBD5E1; border-radius:16px; padding:20px; margin-top:24px; }
+  .bc-box h4 { font-size:14.5px; font-weight:850; margin-bottom:6px; }
+  .bc-box p { font-size:12.5px; color:var(--text-secondary); line-height:1.6; }
+  .tag-click { cursor:pointer; }
+  .chat-msgs > * { flex-shrink:0; }
+  .tag-click.on { outline:2px solid currentColor; }
+  @media (max-width: 1024px) { .verify-grid, .roadmap, .opt-grid, .grid-2col { grid-template-columns:1fr; } .pc { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-logo-box">
+      <span class="hdr-logo-brand">Thịnh Thế Vinh Hoa</span>
+      <span class="hdr-logo-x">×</span>
+      <span class="hdr-logo-zalo">Zalo Business Solutions</span>
+    </div>
+    <div class="hdr-div"></div>
+    <div class="hdr-sub">Hệ thống tuyển dụng đa thương hiệu · đa khu vực trên Zalo</div>
+  </div>
+  <div class="hdr-right">
+    <div class="live-badge"><div class="live-dot"></div>LIVE DEMO</div>
+    <div class="hdr-pill">ZBS 2026</div>
+  </div>
+</div>
+
+<div class="tabs-container">
+  <div class="tabs">
+    <div class="tab-btn active" onclick="switchTab('intro', this)">🏢 Bối cảnh & Đề xuất</div>
+    <div class="tab-btn" onclick="switchTab('customer', this)">⚡ Trải nghiệm Ứng viên</div>
+    <div class="tab-btn" onclick="switchTab('operations', this)">🔀 Kiến trúc OA & Điều hướng</div>
+    <div class="tab-btn" onclick="switchTab('crm', this)">🏷️ Quản lý Ứng viên & Nhãn</div>
+    <div class="tab-btn" onclick="switchTab('dashboard', this)">📊 Dashboard Tuyển dụng</div>
+    <div class="tab-btn" onclick="switchTab('zbs', this)">📡 ZBS Message Tuyển dụng</div>
+  </div>
+</div>
+
+<div class="main-content">
+
+<!-- ============ TAB 1 ============ -->
+<div id="tab-intro" class="tab-pane active">
+  <div class="welcome-hero">
+    <div class="hero-eyebrow">Zalo Business Solutions · Đề xuất cho Thịnh Thế Vinh Hoa</div>
+    <div class="hero-title">Từ <span>1 OA tuyển dụng</span> đến hệ thống tuyển dụng<br>đa thương hiệu, đa khu vực ngay trên Zalo</div>
+    <div class="hero-sub">Thịnh Thế Vinh Hoa tuyển dụng cho hệ thống cửa hàng MayCha, Hồng Trà Sữa Tam Hảo, Gà Giòn Sốt Ba Cô Gái, Trà Hú… tại TP.HCM, Hà Nội và các tỉnh. Phòng Nhân sự đã cam kết liên hệ ứng viên qua Zalo trong 24–48h — ZBS giúp chuẩn hóa cam kết đó thành một luồng có thể vận hành ở quy mô lớn.</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">4+</span><span class="lbl">Thương hiệu đang tuyển</span></div>
+      <div class="hero-stat"><span class="num">2</span><span class="lbl">Khu vực trọng điểm: HCM & Hà Nội</span></div>
+      <div class="hero-stat"><span class="num">24–48h</span><span class="lbl">Cam kết liên hệ ứng viên</span></div>
+      <div class="hero-stat"><span class="num">81 triệu</span><span class="lbl">Người dùng Zalo thường xuyên</span></div>
+    </div>
+  </div>
+
+  <div class="verify-card">
+    <h3>❓ Câu hỏi của khách hàng: "1 GPKD chỉ được tạo 1 OA?"</h3>
+    <div class="verify-q">Trả lời ngắn: <b>Không đúng với doanh nghiệp (Công ty TNHH/CP).</b> Quy định "chỉ 01 OA xác thực" áp dụng cho Hộ kinh doanh và Doanh nghiệp tư nhân.</div>
+    <div class="verify-grid">
+      <div class="verify-item"><b>✅ Công ty được sở hữu nhiều OA</b>Zalo cho phép doanh nghiệp tạo nhiều OA khi có mô hình vận hành độc lập theo địa điểm (VD: đội HR riêng tại Hà Nội), hoặc dịch vụ phân hóa theo đối tượng. BQT Zalo OA vẫn có quyền đánh giá và từ chối nếu nhu cầu chưa phù hợp.</div>
+      <div class="verify-item"><b>🏷️ Đặt tên OA chi nhánh</b>Theo cú pháp [Tên doanh nghiệp] + [vị trí]; được thêm tiền tố/hậu tố làm rõ dịch vụ, chi nhánh. Công thức chung: <b style="display:inline">"Tuyển dụng Thịnh Thế Vinh Hoa – [Location]"</b>, VD: "… – Hà Nội". Hồ sơ xác thực dùng GPKD công ty hoặc GCN chi nhánh/địa điểm KD tại Hà Nội.</div>
+      <div class="verify-item"><b>⚠️ Cần xác nhận với khách</b>(1) Loại hình pháp nhân của TTVH. (2) Chi nhánh Hà Nội có GCN đăng ký chi nhánh/địa điểm KD riêng không. (3) Các OA thương hiệu (MayCha, Tam Hảo…) thuộc cùng pháp nhân hay pháp nhân khác — ảnh hưởng tới phương án quản lý tập trung.</div>
+    </div>
+    <div class="verify-src">Nguồn: Zalo OA — <a href="https://oa.zalo.me/home/documents/guides/ho-tro-tao-xac-thuc-cai-dat-oa-cho-chuoi-cua-hang_7533181939656049281" target="_blank" rel="noopener">Hỗ trợ tạo, xác thực, cài đặt OA cho chuỗi cửa hàng</a> · <a href="https://oa.zalo.me/home/documents/guides/xac-thuc-cach-1" target="_blank" rel="noopener">Xác thực theo tên doanh nghiệp/địa điểm kinh doanh</a> · <a href="https://oa.zalo.me/home/documents/guides/huong-dan-dat-ten-zalo-oa_66" target="_blank" rel="noopener">Hướng dẫn đặt tên Zalo OA</a></div>
+  </div>
+
+  <div class="grid-2col">
+    <div class="panel-card-intro">
+      <h3 class="intro-problem-title">⚠️ Bối cảnh & Điểm nghẽn</h3>
+      <div class="problem-list">
+        <div class="problem-item"><span class="icon">🗺️</span><div><h4>A. Ứng viên HCM & Hà Nội dồn chung một kênh</h4><p>Đội HR Hà Nội khó chủ động tiếp nhận, ứng viên miền Bắc phải chờ phân luồng thủ công.</p></div></div>
+        <div class="problem-item"><span class="icon">🔀</span><div><h4>B. Khó điều hướng ứng viên đến đúng thương hiệu</h4><p>Ứng viên vào OA tuyển dụng chung nhưng chưa có luồng dẫn sang đúng OA thương hiệu (MayCha / Tam Hảo / Ba Cô Gái / Trà Hú) — HR phải hỏi lại, chuyển tiếp thủ công, dễ rơi ứng viên.</p></div></div>
+        <div class="problem-item"><span class="icon">📞</span><div><h4>C. Cam kết 24–48h phụ thuộc gọi điện thủ công</h4><p>Xác nhận hồ sơ, hẹn phỏng vấn, báo kết quả đang làm tay qua điện thoại / Zalo cá nhân — khó đảm bảo khi lượng hồ sơ tăng.</p></div></div>
+        <div class="problem-item"><span class="icon">🧩</span><div><h4>D. Dữ liệu ứng viên phân tán</h4><p>Hồ sơ nằm ở form website, hội thoại OA và Zalo cá nhân của HR — khó đo tỷ lệ chuyển đổi theo thương hiệu, khu vực.</p></div></div>
+      </div>
+    </div>
+    <div class="panel-card-intro">
+      <h3 class="intro-solution-title">✨ Giải pháp ZBS đề xuất</h3>
+      <div class="solution-list">
+        <div class="solution-item"><span class="icon">🏢</span><div><h4>1. Mô hình OA tuyển dụng theo khu vực: "Tuyển dụng Thịnh Thế Vinh Hoa – [Location]"</h4><p>Mỗi khu vực có đội HR riêng được vận hành 1 OA xác thực chính danh. Hà Nội là OA đầu tiên; có thể nhân rộng cho Đà Nẵng hoặc tỉnh khác khi đủ điều kiện. Luồng phân loại & điều hướng ứng viên áp dụng giống nhau cho mọi OA.</p></div></div>
+        <div class="solution-item"><span class="icon">🔀</span><div><h4>2. Menu + chatbot điều hướng theo thương hiệu</h4><p>Ứng viên chọn thương hiệu/việc làm → nhận nút mở OA thương hiệu tương ứng để HR thương hiệu tư vấn tiếp. Gắn nhãn tự động để đo lường.</p></div></div>
+        <div class="solution-item"><span class="icon">📡</span><div><h4>3. ZBS Message trong hành trình tuyển dụng</h4><p>Xác nhận tiếp nhận hồ sơ · Lịch phỏng vấn · Nhắc lịch · Thông báo kết quả — tùy loại tin được Zalo duyệt và ứng viên đã cung cấp SĐT/đồng ý nhận tin.</p></div></div>
+        <div class="solution-item"><span class="icon">🔗</span><div><h4>4. (Giai đoạn sau) Tích hợp form website / hệ thống tuyển dụng</h4><p>Khi volume đủ lớn: hồ sơ từ website tự động kích hoạt tin xác nhận, không cần HR thao tác tay.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="roadmap">
+    <div class="rm-card"><div class="rm-phase">Giai đoạn 1 · Tuần 1–2</div><div class="rm-title">Dựng nền OA</div><ul><li>Tạo & xác thực OA Hà Nội</li><li>Rà soát OA hiện có của các thương hiệu</li><li>Menu + tin chào + chatbot điều hướng</li></ul></div>
+    <div class="rm-card"><div class="rm-phase">Giai đoạn 2 · Tuần 3–6</div><div class="rm-title">Tự động hóa thông báo</div><ul><li>Đăng ký & duyệt mẫu ZBS Message tuyển dụng</li><li>Gửi theo danh sách qua công cụ ZBS (chưa cần tích hợp)</li><li>Bộ nhãn ứng viên chuẩn cho HR</li></ul></div>
+    <div class="rm-card"><div class="rm-phase">Giai đoạn 3 · Sau pilot</div><div class="rm-title">Tích hợp & đo lường</div><ul><li>Kết nối form website / hệ thống tuyển dụng</li><li>Gửi tin tự động theo trạng thái hồ sơ</li><li>Dashboard phễu tuyển dụng theo thương hiệu</li></ul></div>
+  </div>
+
+  <div style="text-align:center;"><button class="btn btn-primary" onclick="switchTab('customer')">Bắt đầu trải nghiệm ứng viên →</button></div>
+</div>
+
+<!-- ============ TAB 2 ============ -->
+<div id="tab-customer" class="tab-pane">
+  <div class="experience-layout">
+    <div class="phone-container">
+      <div class="phone-body">
+        <div class="phone-notch"><div class="phone-notch-camera"></div></div>
+        <div class="phone-screen">
+
+          <div id="p-screen-search" class="p-screen active">
+            <div class="zalo-top"><div class="zalo-search-bar"><span>🔍</span><input type="text" value="Tuyển dụng Thịnh Thế Vinh Hoa" readonly></div></div>
+            <div class="zalo-results">
+              <div class="search-section-title">Official Account</div>
+              <div class="oa-search-card" onclick="pickOA('hcm')">
+                <div class="oa-search-avatar">TT</div>
+                <div class="oa-search-info"><div class="oa-search-name">Tuyển dụng Thịnh Thế Vinh Hoa <span class="oa-search-badge">✓</span></div><div class="oa-search-desc">OA hiện tại · TP. Hồ Chí Minh</div></div>
+                <span style="color:var(--text-muted)">›</span>
+              </div>
+              <div class="oa-search-card" onclick="pickOA('hn')" style="border:1.5px solid #10B981;">
+                <div class="oa-search-avatar" style="background:#10B981;color:white">HN</div>
+                <div class="oa-search-info"><div class="oa-search-name">Tuyển dụng Thịnh Thế Vinh Hoa – Hà Nội <span class="oa-search-badge">✓</span></div><div class="oa-search-desc">OA đề xuất mới · Khu vực Hà Nội</div></div>
+                <span style="color:var(--text-muted)">›</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="p-screen-home" class="p-screen">
+            <div class="oa-home-cover" style="background:linear-gradient(135deg,#0047AB,#10B981)"></div>
+            <div class="oa-home-profile">
+              <div class="oa-home-avatar" id="homeAv" style="font-size:18px;font-weight:900;color:var(--zalo-blue)">HN</div>
+              <div class="oa-home-details">
+                <div class="oa-home-name"><span id="homeName">Tuyển dụng Thịnh Thế Vinh Hoa – Hà Nội</span> <span class="oa-search-badge">✓</span></div>
+                <div class="oa-home-desc">Kênh tuyển dụng chính thức tại <span id="homeArea">Hà Nội</span> cho hệ thống cửa hàng MayCha, Tam Hảo, Ba Cô Gái, Trà Hú.</div>
+              </div>
+            </div>
+            <div class="oa-home-btn-row">
+              <button class="btn-follow" id="btnFollow" onclick="toggleFollow()" style="font-size:12px;">➕ Quan tâm</button>
+              <button class="btn-chat-oa" onclick="openChat()">💬 Nhắn tin</button>
+            </div>
+            <div class="oa-quick-menu-grid">
+              <div class="oa-quick-tile highlight" onclick="openChat(); setTimeout(()=>userSay('🧋 Việc làm theo thương hiệu'),900)"><span class="oa-quick-tile-icon">🧋</span><span class="oa-quick-tile-label">Việc theo<br>thương hiệu</span></div>
+              <div class="oa-quick-tile" onclick="openChat()"><span class="oa-quick-tile-icon">📝</span><span class="oa-quick-tile-label">Ứng tuyển<br>nhanh</span></div>
+              <div class="oa-quick-tile" onclick="openChat()"><span class="oa-quick-tile-icon">🎁</span><span class="oa-quick-tile-label">Quyền<br>lợi</span></div>
+              <div class="oa-quick-tile" onclick="openChat()"><span class="oa-quick-tile-icon">📞</span><span class="oa-quick-tile-label">Hotline<br>HR</span></div>
+            </div>
+            <div class="oa-home-menu"><div class="oa-menu-title">Bài viết</div><div class="oa-menu-item"><span>📌 Tuyển gấp pha chế part-time</span><span>›</span></div><div class="oa-menu-item"><span>🎓 Đào tạo miễn phí từ A–Z</span><span>›</span></div></div>
+          </div>
+
+          <div id="p-screen-chat" class="p-screen">
+            <div class="chat-hdr"><span class="chat-hdr-back" onclick="goToPhoneScreen('home')">‹</span><div class="chat-hdr-avatar" id="chatAv" style="font-size:11px;font-weight:900">HN</div><div class="chat-hdr-info"><div class="chat-hdr-name" id="chatName">Tuyển dụng TTVH – Hà Nội</div><div class="chat-hdr-status">Official Account</div></div></div>
+            <div class="chat-msgs" id="chatHN"></div>
+            <div class="chat-input-box"><input type="text" class="chat-input-field" placeholder="Nhập tin nhắn..." readonly><button class="chat-send-btn">➤</button></div>
+          </div>
+
+          <div id="p-screen-brand" class="p-screen">
+            <div class="chat-hdr"><span class="chat-hdr-back" onclick="goToPhoneScreen('chat')">‹</span><div class="chat-hdr-avatar" id="brandAvatar">🍵</div><div class="chat-hdr-info"><div class="chat-hdr-name" id="brandName">Hồng Trà Sữa Tam Hảo</div><div class="chat-hdr-status">Official Account thương hiệu</div></div></div>
+            <div class="chat-msgs" id="chatBrand"></div>
+            <div class="chat-input-box"><input type="text" class="chat-input-field" placeholder="Nhập tin nhắn..." readonly><button class="chat-send-btn">➤</button></div>
+            <div class="form-overlay" id="formOverlay">
+              <div class="form-sheet">
+                <h4>📝 Chia sẻ thông tin ứng tuyển</h4>
+                <p>Thông tin được gửi tới HR <span id="formBrand">Tam Hảo</span> <span id="formArea">Hà Nội</span> để hẹn phỏng vấn.</p>
+                <input id="fName" value="Nguyễn Minh Anh">
+                <input id="fPhone" value="0912 345 678">
+                <select id="fShift"><option>Ca tối (18h–22h)</option><option>Ca sáng (7h–12h)</option><option>Toàn thời gian</option></select>
+                <label><input type="checkbox" id="fConsent" checked style="width:auto;margin:2px 0 0"> Tôi đồng ý nhận thông báo về hồ sơ, lịch phỏng vấn và kết quả tuyển dụng qua Zalo.</label>
+                <button onclick="submitForm()">Gửi thông tin</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="instructions-panel">
+      <div class="guide-card">
+        <h3>🎯 Kịch bản: Minh Anh — sinh viên tìm việc part-time</h3>
+        <div class="guide-step active" onclick="goToPhoneScreen('search')"><div class="gs-num">1</div><div class="gs-text"><div class="gs-title">Tìm OA tuyển dụng trên Zalo</div><div class="gs-desc">OA tách theo khu vực — chọn OA nào cũng chạy cùng một luồng</div></div></div>
+        <div class="guide-step"><div class="gs-num">2</div><div class="gs-text"><div class="gs-title">Nhắn tin với OA & nhận tin chào</div><div class="gs-desc">Không bắt buộc Quan tâm — "Quan tâm" và "Nhắn tin" là 2 hành động độc lập</div></div></div>
+        <div class="guide-step"><div class="gs-num">3</div><div class="gs-text"><div class="gs-title">Chọn thương hiệu / việc làm</div><div class="gs-desc">Chatbot hiển thị danh sách thương hiệu đang tuyển theo khu vực</div></div></div>
+        <div class="guide-step"><div class="gs-num">4</div><div class="gs-text"><div class="gs-title">Điều hướng sang OA thương hiệu</div><div class="gs-desc">Nút "Liên hệ OA [Thương hiệu] để ứng tuyển" → HR thương hiệu tư vấn</div></div></div>
+        <div class="guide-step"><div class="gs-num">5</div><div class="gs-text"><div class="gs-title">Gửi thông tin ứng tuyển</div><div class="gs-desc">Form yêu cầu thông tin trong chat, kèm đồng ý nhận tin</div></div></div>
+        <div class="guide-step"><div class="gs-num">6</div><div class="gs-text"><div class="gs-title">Nhận ZBS Message theo hành trình</div><div class="gs-desc">Xác nhận hồ sơ → Lịch phỏng vấn → Kết quả</div></div></div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn btn-ghost" onclick="resetPhone()">↺ Chạy lại</button>
+          <button class="btn btn-primary" id="btnNextZbs" onclick="nextZbs()" style="display:none">▶ HR gửi tin tiếp theo</button>
+        </div>
+      </div>
+
+      <div class="crm-sync-widget">
+        <div class="crm-sync-hdr"><span>🗂️ Hồ sơ ứng viên ghi nhận (mô phỏng)</span><div class="crm-sync-dot" id="syncDot"></div></div>
+        <div class="crm-sync-grid">
+          <div class="crm-sync-item"><div class="crm-sync-lbl">Họ tên</div><div class="crm-sync-val" id="s-name">—</div></div>
+          <div class="crm-sync-item"><div class="crm-sync-lbl">SĐT</div><div class="crm-sync-val" id="s-phone">—</div></div>
+          <div class="crm-sync-item"><div class="crm-sync-lbl">OA nguồn · Quan tâm OA</div><div class="crm-sync-val" id="s-src">—</div></div>
+          <div class="crm-sync-item"><div class="crm-sync-lbl">Thương hiệu</div><div class="crm-sync-val" id="s-brand">—</div></div>
+          <div class="crm-sync-item"><div class="crm-sync-lbl">Vị trí · Khu vực</div><div class="crm-sync-val" id="s-job">—</div></div>
+          <div class="crm-sync-item"><div class="crm-sync-lbl">Đồng ý nhận tin</div><div class="crm-sync-val" id="s-consent">—</div></div>
+          <div class="crm-sync-item" style="grid-column:1/3"><div class="crm-sync-lbl">Trạng thái tuyển dụng</div><div class="crm-sync-val" id="s-status">—</div></div>
+        </div>
+      </div>
+
+      <div class="tech-note"><b>Lưu ý khi tư vấn khách:</b> Ứng viên <b>không cần Quan tâm OA</b> vẫn nhắn tin và nhận tin tư vấn trong hội thoại — "Quan tâm" và "Nhắn tin" là 2 hành động độc lập. Điều hướng giữa các OA thực hiện bằng nút/đường dẫn mở OA đích trong menu, tin chatbot hoặc bài viết. Lịch sử chat <b>không tự chuyển</b> sang OA đích, và mỗi OA nhận diện ứng viên bằng một mã riêng (theo phạm vi OA). Muốn hợp nhất hồ sơ giữa các OA, nên dùng <b>SĐT làm khóa chung</b> hoặc tích hợp CRM/hệ thống tuyển dụng.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TAB 3 ============ -->
+<div id="tab-operations" class="tab-pane">
+  <div class="arch-wrap">
+    <h3>🏗️ Kiến trúc OA đề xuất</h3>
+    <div class="arch-sub">OA tuyển dụng theo khu vực là "cửa ngõ" ứng viên — OA thương hiệu là nơi HR thương hiệu tư vấn chuyên sâu.</div>
+    <div class="arch-row">
+      <div class="arch-node hq"><div class="n">Tuyển dụng Thịnh Thế Vinh Hoa</div><div class="d">OA hiện tại · TP.HCM & tỉnh</div></div>
+      <div class="arch-node new"><div class="n">Tuyển dụng Thịnh Thế Vinh Hoa – Hà Nội</div><div class="d">OA mới · HR Hà Nội</div></div>
+    </div>
+    <div class="arch-arrow">⬇ Menu / chatbot "Chọn thương hiệu" → nút mở OA tương ứng ⬇</div>
+    <div class="arch-row">
+      <div class="arch-node"><div class="n">🧋 Trà Sữa MayCha</div><div class="d">OA thương hiệu</div></div>
+      <div class="arch-node"><div class="n">🍵 Hồng Trà Sữa Tam Hảo</div><div class="d">OA thương hiệu</div></div>
+      <div class="arch-node"><div class="n">🍗 Gà Giòn Sốt Ba Cô Gái</div><div class="d">OA thương hiệu</div></div>
+      <div class="arch-node"><div class="n">🥤 Trà Hú – Đậm Hú Hồn</div><div class="d">OA thương hiệu</div></div>
+    </div>
+    <div class="arch-sub" style="margin-top:14px; margin-bottom:0; text-align:center">* Danh sách OA thương hiệu cần xác minh: OA nào đã có, đang xác thực theo pháp nhân nào, ai là quản trị viên.</div>
+  </div>
+
+  <div class="opt-card rec" style="margin-bottom:24px">
+    <span class="opt-tag" style="background:#EFF5FF;color:var(--zalo-blue)">LUỒNG TRIỂN KHAI</span>
+    <h4>Ứng viên chat với OA Tuyển dụng (HR) trước → điều hướng sang OA thương hiệu</h4>
+    <p>OA tuyển dụng theo khu vực tiếp nhận ứng viên, chatbot phân loại theo thương hiệu/việc làm và gắn nhãn, sau đó gửi nút "Liên hệ OA [Thương hiệu] để ứng tuyển" để HR thương hiệu tư vấn tiếp.</p>
+    <div class="pc"><div><b>👍 Giá trị</b>Ứng viên có 1 điểm vào duy nhất theo khu vực; HR thương hiệu nhận đúng ứng viên quan tâm thương hiệu mình; nhãn ở OA tuyển dụng giúp đo lường nguồn theo thương hiệu.</div><div><b>⚠️ Cần chuẩn bị</b>Xác minh OA thương hiệu đã có & quản trị viên; lịch sử chat không tự chuyển sang OA đích → nên dùng SĐT làm khóa chung khi hợp nhất hồ sơ.</div></div>
+  </div>
+
+  <div class="ops-progress-wrap">
+    <div class="ops-progress-hdr"><strong>Mô phỏng vận hành luồng điều hướng</strong><span id="ops-step-pct">Bước 1 / 6</span></div>
+    <div class="ops-progress-track"><div class="ops-progress-fill" id="ops-progress-bar" style="width:16%"></div></div>
+  </div>
+  <div class="ops-step-nav" id="opsNav"></div>
+  <div class="ops-stage">
+    <div class="ops-lane" id="lane-customer"><div class="ops-lane-hdr"><div class="ops-lane-avatar" style="background:#FCE4EC">👩‍🎓</div><div class="ops-lane-info"><div class="ops-lane-name">Ứng viên Minh Anh</div><div class="ops-lane-role">Zalo cá nhân</div></div></div><div class="ops-lane-body" id="ops-chat-customer"></div></div>
+    <div class="ops-lane" id="lane-hq"><div class="ops-lane-hdr"><div class="ops-lane-avatar" style="background:#ECFDF5">🤖</div><div class="ops-lane-info"><div class="ops-lane-name">OA Tuyển dụng TTVH – Hà Nội</div><div class="ops-lane-role">Chatbot · Nhãn · HR Hà Nội</div></div></div><div class="ops-lane-body" id="ops-chat-hq"></div></div>
+    <div class="ops-lane" id="lane-branch"><div class="ops-lane-hdr"><div class="ops-lane-avatar" style="background:#E3F2FD">🍵</div><div class="ops-lane-info"><div class="ops-lane-name">OA Tam Hảo · HR thương hiệu</div><div class="ops-lane-role">Tư vấn · Hẹn phỏng vấn</div></div></div><div class="ops-lane-body" id="ops-chat-branch"></div></div>
+  </div>
+  <div class="ops-controls">
+    <button class="btn btn-ghost" onclick="prevOps()">← Trước</button>
+    <div class="ops-desc-box"><div class="ops-step-title" id="opsStepTitle"></div><div class="ops-step-desc" id="opsStepDesc"></div></div>
+    <button class="btn btn-primary" onclick="nextOps()">Tiếp →</button>
+  </div>
+</div>
+
+<!-- ============ TAB 4 ============ -->
+<div id="tab-crm" class="tab-pane">
+  <div class="note-illus">Dữ liệu ứng viên dưới đây là minh họa.</div>
+  <div class="crm-layout">
+    <div class="crm-panel">
+      <div class="crm-panel-title">Hộp thư OA Tuyển dụng – Hà Nội</div>
+      <div class="crm-panel-sub">Lọc hội thoại theo nhãn trạng thái / thương hiệu</div>
+      <div class="crm-inbox">
+        <div class="crm-inbox-topbar"><div class="crm-inbox-title">💬 Hội thoại ứng viên</div><div class="crm-inbox-sub">Nhãn gắn tự động từ chatbot + HR cập nhật</div></div>
+        <div class="crm-filters" id="crmFilters"></div>
+        <div class="crm-convo-list" id="crmList"></div>
+      </div>
+    </div>
+    <div class="crm-sheet">
+      <div class="crm-card">
+        <div class="crm-sheet-hdr">Hồ sơ ứng viên</div>
+        <div class="crm-profile-hdr"><div class="crm-profile-avatar" id="pAvatar">👩‍🎓</div><div><div class="crm-profile-name" id="pName"></div><div class="crm-profile-meta" id="pMeta"></div></div></div>
+        <div class="crm-profile-grid" id="pGrid"></div>
+        <div class="crm-tags-manager">
+          <div><div class="crm-tag-group-title">Trạng thái tuyển dụng (bấm để cập nhật)</div><div class="crm-tag-wrap" id="pStatus"></div></div>
+          <div><div class="crm-tag-group-title">Thương hiệu · Khu vực · Nguồn</div><div class="crm-tag-wrap" id="pTags"></div></div>
+        </div>
+      </div>
+      <div class="crm-card">
+        <div class="crm-sheet-hdr">Bộ nhãn chuẩn đề xuất cho HR</div>
+        <div style="font-size:12.5px; color:var(--text-secondary); line-height:1.8">
+          <b>Thương hiệu:</b> MayCha · Tam Hảo · Ba Cô Gái · Trà Hú · Khối văn phòng · Kho & xưởng<br>
+          <b>Khu vực:</b> HCM · Hà Nội · Tỉnh khác<br>
+          <b>Trạng thái:</b> Mới · Đã liên hệ · Hẹn PV · Đã PV · Trúng tuyển · Không phù hợp<br>
+          <b>Nguồn:</b> Menu OA · Form website · Zalo Ads · Giới thiệu
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TAB 5 ============ -->
+<div id="tab-dashboard" class="tab-pane">
+  <div class="note-illus">⚠️ Số liệu minh họa để hình dung cách đo lường — dashboard phễu tuyển dụng cần dữ liệu từ hệ thống tuyển dụng/CRM tích hợp (Giai đoạn 3).</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-card-icon">📥</div><div class="kpi-card-val" data-count="1240">0</div><div class="kpi-card-lbl">Hồ sơ mới / tháng</div><div class="kpi-card-delta kpi-up">Mọi kênh</div></div>
+    <div class="kpi-card"><div class="kpi-card-icon">⚡</div><div class="kpi-card-val" data-count="92" data-suffix="%">0</div><div class="kpi-card-lbl">Hồ sơ được xác nhận &lt; 24h</div><div class="kpi-card-delta kpi-up">Nhờ ZBS Message</div></div>
+    <div class="kpi-card"><div class="kpi-card-icon">📅</div><div class="kpi-card-val" data-count="610">0</div><div class="kpi-card-lbl">Lịch phỏng vấn đã hẹn</div><div class="kpi-card-delta kpi-up">49% hồ sơ</div></div>
+    <div class="kpi-card"><div class="kpi-card-icon">🙋</div><div class="kpi-card-val" data-count="74" data-suffix="%">0</div><div class="kpi-card-lbl">Tỷ lệ đến phỏng vấn</div><div class="kpi-card-delta kpi-up">Có tin nhắc lịch</div></div>
+    <div class="kpi-card"><div class="kpi-card-icon">🎉</div><div class="kpi-card-val" data-count="215">0</div><div class="kpi-card-lbl">Ứng viên nhận việc</div><div class="kpi-card-delta kpi-up">17% hồ sơ</div></div>
+  </div>
+  <div class="db-chart-row">
+    <div class="db-chart-card"><h3>Phễu tuyển dụng</h3><div class="db-chart-sub">Hồ sơ → Đủ điều kiện → Hẹn PV → Đến PV → Nhận việc</div><div class="db-chart-wrap"><canvas id="chFunnel"></canvas></div></div>
+    <div class="db-chart-card"><h3>Hồ sơ theo thương hiệu</h3><div class="db-chart-sub">Tỷ trọng ứng viên chọn thương hiệu</div><div class="db-chart-wrap"><canvas id="chBrand"></canvas></div></div>
+  </div>
+  <div class="db-chart-row">
+    <div class="db-chart-card"><h3>Hồ sơ theo tuần — HCM vs Hà Nội</h3><div class="db-chart-sub">Sau khi tách OA Hà Nội</div><div class="db-chart-wrap"><canvas id="chRegion"></canvas></div></div>
+    <div class="db-chart-card"><h3>Nguồn ứng viên</h3><div class="db-chart-sub">Kênh khởi tạo hồ sơ</div><div class="db-chart-wrap"><canvas id="chSource"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ============ TAB 6 ============ -->
+<div id="tab-zbs" class="tab-pane">
+  <div class="zbs-layout">
+    <div class="zbs-form-card">
+      <div class="zbs-form-title">📡 ZBS Message theo hành trình ứng viên <span class="zbs-badge">Mẫu tin cần Zalo duyệt</span></div>
+      <div class="tpl-tabs" id="tplTabs"></div>
+      <div class="fg"><span class="fg-lbl">Phương thức gửi</span>
+        <div class="mth">
+          <div class="active" id="m-phone" onclick="setMethod('phone')"><b>📱 Theo số điện thoại</b>Dùng SĐT ứng viên điền ở form website/OA. Không cần ứng viên đã quan tâm OA. Có trạng thái đã tới máy, không có trạng thái "đã đọc".</div>
+          <div id="m-uid" onclick="setMethod('uid')"><b>🆔 Theo UID (đã tương tác OA)</b>Dành cho ứng viên đã chat/quan tâm OA. Ghi nhận được sự kiện đã nhận/đã xem trên Zalo Mobile.</div>
+        </div>
+      </div>
+      <div class="fg"><span class="fg-lbl">Tham số mẫu tin (sửa để xem preview)</span><div id="tplFields" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"></div></div>
+      <div class="fg"><span class="fg-lbl">Điều kiện gửi hợp lệ</span>
+        <ul class="cond-list">
+          <li>✅ Mẫu tin được Zalo duyệt trước khi sử dụng; nội dung mang tính thông báo/chăm sóc, không quảng cáo.</li>
+          <li>✅ Ứng viên tự cung cấp SĐT và đồng ý nhận thông báo (ghi nhận tại form).</li>
+          <li>✅ Gửi từ OA đã xác thực của doanh nghiệp.</li>
+          <li>💰 Chi phí tính theo từng tin gửi thành công — tách biệt với chi phí gói OA.</li>
+        </ul>
+      </div>
+      <button class="btn btn-primary" onclick="sendTpl()" style="width:100%; justify-content:center">🚀 Mô phỏng gửi tin</button>
+      <div id="sentBox" style="display:none; margin-top:14px;" class="sent-notification-box"></div>
+    </div>
+    <div class="zbs-preview-panel">
+      <div class="zbs-preview-title">👁️ Preview trên Zalo ứng viên</div>
+      <div class="preview-phone-card" style="padding:14px; background:#E5E7EB; border-radius:16px;">
+        <div class="zbs-msg-card" style="max-width:100%" id="tplPreview"></div>
+      </div>
+      <div style="font-size:11px; color:var(--text-muted); margin-top:10px; line-height:1.5">Bố cục minh họa. Mẫu thực tế phụ thuộc loại tin (Tùy chỉnh / Xác thực…), module hình ảnh và nút CTA được duyệt.</div>
+    </div>
+  </div>
+  <div class="bc-box">
+    <h4>📢 Phân biệt: Broadcast OA cho tin "Tuyển gấp"</h4>
+    <p>Thông báo mở đợt tuyển (VD: "Tam Hảo Hà Nội tuyển 20 pha chế part-time") là <b>tin truyền thông</b> — gửi Broadcast tới người đã quan tâm OA, tính theo hạn mức/gói OA. <b>ZBS Message</b> dành cho thông báo cá nhân hóa theo từng hồ sơ (xác nhận, lịch PV, kết quả), tính phí theo tin. Hai loại tin khác nhau về đối tượng nhận, chi phí và cách gửi — nên dùng kết hợp, không thay thế nhau.</p>
+  </div>
+</div>
+
+</div>
+
+<div class="toast" id="toastBox"></div>
+
+<script>
+const BRANDS = {
+  maycha: { name:'Trà Sữa MayCha', short:'MayCha', ico:'🧋', bg:'#FEF3C7' },
+  tamhao: { name:'Hồng Trà Sữa Tam Hảo', short:'Tam Hảo', ico:'🍵', bg:'#FCE7F3' },
+  bacogai:{ name:'Gà Giòn Sốt Ba Cô Gái', short:'Ba Cô Gái', ico:'🍗', bg:'#FFE4E6' },
+  trahu:  { name:'Trà Hú – Đậm Hú Hồn', short:'Trà Hú', ico:'🥤', bg:'#DCFCE7' }
+};
+let st = {};
+const OAS = {
+  hn:{ code:'HN', name:'Tuyển dụng Thịnh Thế Vinh Hoa – Hà Nội', short:'Tuyển dụng TTVH – Hà Nội', area:'Hà Nội', areas:['Cầu Giấy','Đống Đa','Hà Đông'] },
+  hcm:{ code:'TT', name:'Tuyển dụng Thịnh Thế Vinh Hoa', short:'Tuyển dụng TTVH', area:'TP.HCM', areas:['Quận 1','Quận 3','Bình Thạnh'] }
+};
+function resetState(){ st = { oa:'hn', followed:false, chatted:false, brand:null, job:null, area:null, submitted:false, zbsStep:0 }; }
+resetState();
+
+function switchTab(id, el){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  (el || [...document.querySelectorAll('.tab-btn')].find(b=>b.getAttribute('onclick').includes("'"+id+"'"))).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(id==='dashboard'){ initCharts(); countKpi(); }
+  if(id==='operations' && !opsStarted){ opsStarted=true; gotoOps(0); }
+}
+function showToast(m){ const t=document.getElementById('toastBox'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
+function goToPhoneScreen(id){ document.querySelectorAll('.p-screen').forEach(s=>s.classList.remove('active')); document.getElementById('p-screen-'+id).classList.add('active'); }
+function updateGuide(n){ document.querySelectorAll('.guide-step').forEach((s,i)=>{ s.classList.remove('active','done'); if(i+1<n) s.classList.add('done'); if(i+1===n) s.classList.add('active'); }); }
+function setSync(id,v){ const e=document.getElementById(id); e.textContent=v; document.getElementById('syncDot').classList.add('active'); }
+
+function push(boxId, html){ const b=document.getElementById(boxId); b.insertAdjacentHTML('beforeend', html); b.scrollTop=b.scrollHeight; }
+function typing(boxId, cb, d=700){ push(boxId,'<div class="p-typing" id="typ"><div class="p-typing-dot"></div><div class="p-typing-dot"></div><div class="p-typing-dot"></div></div>'); setTimeout(()=>{ const t=document.getElementById('typ'); if(t) t.remove(); cb(); }, d); }
+function clearQR(){ document.querySelectorAll('.p-quick-replies').forEach(q=>q.remove()); }
+
+function pickOA(k){
+  if(st.oa!==k || st.chatted){ const keep=k; resetPhone(true); st.oa=keep; }
+  st.oa=k; const o=OAS[k];
+  document.getElementById('homeAv').textContent=o.code; document.getElementById('chatAv').textContent=o.code;
+  document.getElementById('homeName').textContent=o.name; document.getElementById('homeArea').textContent=o.area;
+  document.getElementById('chatName').textContent=o.short; document.getElementById('formArea').textContent=o.area;
+  goToPhoneScreen('home'); updateGuide(1);
+}
+function toggleFollow(){
+  st.followed=!st.followed;
+  document.getElementById('btnFollow').textContent = st.followed ? '✓ Đã quan tâm' : '➕ Quan tâm';
+  setSync('s-src', OAS[st.oa].short + (st.followed?' · Đã quan tâm':' · Chưa quan tâm'));
+  showToast(st.followed ? '✅ Đã quan tâm OA — nhận được bài viết/Broadcast của OA' : 'Đã bỏ quan tâm OA');
+}
+function openChat(){
+  goToPhoneScreen('chat');
+  if(st.chatted) return;
+  st.chatted=true; updateGuide(2);
+  const o=OAS[st.oa];
+  setSync('s-src', o.short + (st.followed?' · Đã quan tâm':' · Chưa quan tâm'));
+  typing('chatHN',()=>{
+    push('chatHN',`<div class="p-msg bot">Chào bạn 👋 Cảm ơn bạn quan tâm cơ hội việc làm tại ${o.area} cùng Thịnh Thế Vinh Hoa! Bạn đang tìm việc theo hướng nào?</div>
+    <div class="p-quick-replies"><span class="p-qr-btn" onclick="userSay('🧋 Việc làm theo thương hiệu')">🧋 Việc theo thương hiệu</span><span class="p-qr-btn" onclick="userSay('🏢 Khối văn phòng / kho')">🏢 Văn phòng / Kho</span><span class="p-qr-btn" onclick="userSay('🎁 Quyền lợi')">🎁 Quyền lợi</span></div>`);
+  });
+}
+function userSay(t){
+  if(!st.chatted){ openChat(); setTimeout(()=>userSay(t),900); return; }
+  clearQR(); push('chatHN',`<div class="p-msg user">${t}</div>`);
+  if(t.includes('thương hiệu')){
+    updateGuide(3);
+    typing('chatHN',()=>{
+      let rows = Object.entries(BRANDS).map(([k,v])=>`<div class="brand-row" onclick="pickBrand('${k}')"><div class="brand-ico" style="background:${v.bg}">${v.ico}</div><div><div class="brand-name">${v.name}</div><div class="brand-sub">Pha chế · Thu ngân · Ca trưởng</div></div><div class="brand-go">Chọn ›</div></div>`).join('');
+      push('chatHN',`<div class="p-msg bot">Hiện tại ${OAS[st.oa].area} đang tuyển cho các thương hiệu sau, bạn quan tâm thương hiệu nào?</div><div class="brand-pick"><div class="brand-pick-title">Thương hiệu đang tuyển · ${OAS[st.oa].area}</div>${rows}</div>`);
+    });
+  } else if(t.includes('Quyền')){
+    typing('chatHN',()=>push('chatHN','<div class="p-msg bot">💵 Lương cứng + thưởng doanh số + chuyên cần<br>🎓 Đào tạo miễn phí từ A–Z<br>🚀 Lộ trình nhân viên → ca trưởng → quản lý cửa hàng<br><br>Bạn bấm "Việc theo thương hiệu" để xem vị trí nhé!</div><div class="p-quick-replies"><span class="p-qr-btn" onclick="userSay(\'🧋 Việc làm theo thương hiệu\')">🧋 Việc theo thương hiệu</span></div>'));
+  } else {
+    typing('chatHN',()=>push('chatHN','<div class="p-msg bot">Vị trí khối văn phòng/kho được HR Hà Nội tư vấn trực tiếp tại OA này. Trong demo, mời bạn thử luồng điều hướng theo thương hiệu 👇</div><div class="p-quick-replies"><span class="p-qr-btn" onclick="userSay(\'🧋 Việc làm theo thương hiệu\')">🧋 Việc theo thương hiệu</span></div>'));
+  }
+}
+function pickBrand(k){
+  if(st.brand) return;
+  st.brand=k; const v=BRANDS[k];
+  document.querySelectorAll('.brand-pick').forEach(e=>e.style.pointerEvents='none');
+  push('chatHN',`<div class="p-msg user">${v.ico} ${v.name}</div>`);
+  setSync('s-brand', v.name);
+  push('chatHN','<div class="p-msg system">🏷️ Gắn nhãn tự động: '+v.short+' · '+OAS[st.oa].area+' · Nguồn: Menu OA</div>');
+  typing('chatHN',()=>{
+    push('chatHN',`<div class="route-card"><div class="route-card-body">${v.ico} <b>${v.name}</b><br>HR ${v.short} ${OAS[st.oa].area} sẽ tư vấn vị trí, ca làm và địa điểm cửa hàng cho bạn tại OA chính thức của thương hiệu.</div><div class="route-card-btn" onclick="openBrand()">Liên hệ OA ${v.short} để ứng tuyển ›</div></div>`);
+    updateGuide(4);
+  });
+}
+function openBrand(){
+  const v=BRANDS[st.brand];
+  document.getElementById('brandAvatar').textContent=v.ico;
+  document.getElementById('brandName').textContent=v.name;
+  document.getElementById('formBrand').textContent=v.short;
+  goToPhoneScreen('brand');
+  if(document.getElementById('chatBrand').children.length) return;
+  push('chatBrand',`<div class="p-msg system">↪ Bạn được chuyển từ OA ${OAS[st.oa].short}</div>`);
+  typing('chatBrand',()=>push('chatBrand',`<div class="p-msg bot">Chào bạn 👋 HR ${v.short} ${OAS[st.oa].area} đây! Bạn quan tâm vị trí nào ạ?</div><div class="p-quick-replies"><span class="p-qr-btn" onclick="pickJob('Pha chế part-time')">Pha chế part-time</span><span class="p-qr-btn" onclick="pickJob('Thu ngân')">Thu ngân</span><span class="p-qr-btn" onclick="pickJob('Ca trưởng')">Ca trưởng</span></div>`));
+}
+function pickJob(j){
+  st.job=j; clearQR(); push('chatBrand',`<div class="p-msg user">${j}</div>`);
+  typing('chatBrand',()=>push('chatBrand',`<div class="p-msg bot">Bạn muốn làm ở khu vực nào gần bạn nhất?</div><div class="p-quick-replies">${OAS[st.oa].areas.map(a=>`<span class="p-qr-btn" onclick="pickArea('${a}')">${a}</span>`).join('')}</div>`));
+}
+function pickArea(a){
+  st.area=a; clearQR(); push('chatBrand',`<div class="p-msg user">${a}</div>`);
+  setSync('s-job', st.job+' · '+a);
+  typing('chatBrand',()=>{ push('chatBrand',`<div class="route-card"><div class="route-card-body">📝 <b>Yêu cầu chia sẻ thông tin</b><br>Để HR hẹn lịch phỏng vấn, bạn vui lòng chia sẻ họ tên và số điện thoại nhé.</div><div class="route-card-btn" onclick="document.getElementById('formOverlay').classList.add('show')">Chia sẻ thông tin</div></div>`); updateGuide(5); });
+}
+function submitForm(){
+  if(!document.getElementById('fConsent').checked){ showToast('⚠️ Cần đồng ý nhận tin để gửi ZBS Message'); return; }
+  document.getElementById('formOverlay').classList.remove('show');
+  st.submitted=true;
+  setSync('s-name', document.getElementById('fName').value);
+  setSync('s-phone', document.getElementById('fPhone').value);
+  setSync('s-consent','✅ Đồng ý ('+new Date().toLocaleDateString('vi-VN')+')');
+  setSync('s-status','🟡 Mới — chờ HR liên hệ');
+  push('chatBrand',`<div class="p-msg user">✅ Đã chia sẻ: ${document.getElementById('fName').value} · ${document.getElementById('fPhone').value}</div>`);
+  setTimeout(()=>{ zbsMsg(0); updateGuide(6); document.getElementById('btnNextZbs').style.display='inline-flex'; },900);
+}
+const ZBS_FLOW = [
+  { tag:'Xác nhận hồ sơ', status:'🔵 Đã tiếp nhận hồ sơ', body: s=>`<div class="t">Xác nhận tiếp nhận hồ sơ</div>Chào ${document.getElementById('fName').value}, ${BRANDS[s.brand].short} ${OAS[s.oa].area} đã nhận hồ sơ ứng tuyển của bạn.<div class="zbs-msg-row"><span>Vị trí</span><b>${s.job}</b></div><div class="zbs-msg-row"><span>Khu vực</span><b>${s.area}</b></div><div class="zbs-msg-row"><span>Phản hồi dự kiến</span><b>trong 24–48h</b></div>`, btns:['Xem quyền lợi'] },
+  { tag:'Lịch phỏng vấn', status:'🟣 Đã hẹn phỏng vấn', body: s=>`<div class="t">Thư mời phỏng vấn</div>Mời bạn tham gia phỏng vấn vị trí ${s.job}.<div class="zbs-msg-row"><span>Thời gian</span><b>09:30 · Thứ Năm 15/10/2026</b></div><div class="zbs-msg-row"><span>Địa điểm</span><b>Cửa hàng ${BRANDS[s.brand].short} ${s.area}</b></div><div class="zbs-msg-row"><span>Liên hệ</span><b>HR ${OAS[s.oa].area}</b></div>`, btns:['Xác nhận tham gia','Đổi lịch'] },
+  { tag:'Kết quả', status:'🟢 Trúng tuyển — chờ nhận việc', body: s=>`<div class="t">Thông báo kết quả tuyển dụng</div>Chúc mừng bạn đã trúng tuyển vị trí ${s.job} tại ${BRANDS[s.brand].short} ${s.area}! 🎉<div class="zbs-msg-row"><span>Ngày nhận việc</span><b>20/10/2026</b></div><div class="zbs-msg-row"><span>Đào tạo</span><b>Miễn phí, 3 buổi</b></div>`, btns:['Xác nhận nhận việc'] }
+];
+function zbsMsg(i){
+  const f=ZBS_FLOW[i];
+  push('chatBrand',`<div class="zbs-msg-card"><div class="zbs-msg-hdr"><span>ZBS MESSAGE · ${f.tag}</span><span>${BRANDS[st.brand].short}</span></div><div class="zbs-msg-body">${f.body(st)}</div><div class="zbs-msg-btns">${f.btns.map(b=>`<div onclick="showToast('Ứng viên bấm: ${b}')">${b}</div>`).join('')}</div></div>`);
+  setSync('s-status', f.status);
+  st.zbsStep=i;
+}
+function nextZbs(){
+  if(st.zbsStep < ZBS_FLOW.length-1){ zbsMsg(st.zbsStep+1); if(st.zbsStep===ZBS_FLOW.length-1){ document.getElementById('btnNextZbs').style.display='none'; showToast('🎉 Hoàn tất hành trình ứng viên'); } }
+}
+function resetPhone(keepScreen){
+  const prevOA = st.oa; resetState(); st.oa = prevOA;
+  ['chatHN','chatBrand'].forEach(id=>document.getElementById(id).innerHTML='');
+  document.getElementById('btnFollow').textContent='➕ Quan tâm';
+  document.getElementById('btnNextZbs').style.display='none';
+  ['s-name','s-phone','s-src','s-brand','s-job','s-consent','s-status'].forEach(id=>document.getElementById(id).textContent='—');
+  document.getElementById('syncDot').classList.remove('active');
+  if(!keepScreen){ goToPhoneScreen('search'); updateGuide(1); }
+}
+
+/* ---- TAB 3 ops ---- */
+let opsStarted=false, opsIdx=0;
+const OPS = [
+  { title:'1. Ứng viên nhắn tin OA Tuyển dụng', desc:'Ứng viên mở hội thoại với OA (không cần Quan tâm) → nhận tin chào + menu nhu cầu.', hl:'customer', act:[
+    ['customer','out',{text:'Nhắn tin: "Cho em hỏi việc part-time ạ"'}],
+    ['hq','system',{text:'💬 Hội thoại mới · Kích hoạt tin chào'}],
+    ['customer','in',{sender:'OA Tuyển dụng – HN', avatar:'🤖', text:'Chào bạn 👋 Bạn đang tìm việc theo hướng nào? [Việc theo thương hiệu] [Văn phòng/Kho] [Quyền lợi]'}]]},
+  { title:'2. Chọn thương hiệu → gắn nhãn tự động', desc:'Lựa chọn của ứng viên được ghi nhận thành nhãn để HR lọc và đo lường theo thương hiệu, khu vực.', hl:'hq', act:[
+    ['customer','out',{text:'🍵 Hồng Trà Sữa Tam Hảo'}],
+    ['hq','tagging',{text:'🏷️ Nhãn: Tam Hảo · Hà Nội · Nguồn: Menu OA · Trạng thái: Mới'}]]},
+  { title:'3. Điều hướng sang OA thương hiệu', desc:'Chatbot gửi nút "Liên hệ OA Tam Hảo để ứng tuyển". Ứng viên bắt đầu hội thoại mới tại OA đích — lịch sử chat không tự chuyển theo.', hl:'branch', act:[
+    ['customer','in',{sender:'OA Tuyển dụng – HN', avatar:'🤖', text:'HR Tam Hảo Hà Nội sẽ tư vấn bạn. [Liên hệ OA Tam Hảo để ứng tuyển ›]'}],
+    ['branch','system',{text:'💬 Hội thoại mới từ ứng viên (đến từ link OA tuyển dụng)'}],
+    ['branch','in',{sender:'Ứng viên', avatar:'👩‍🎓', text:'Chào HR, em quan tâm vị trí pha chế part-time ạ.'}]]},
+  { title:'4. HR thương hiệu tư vấn & thu thập thông tin', desc:'HR gửi form yêu cầu thông tin trong chat; ứng viên đồng ý chia sẻ họ tên, SĐT và đồng ý nhận thông báo.', hl:'branch', act:[
+    ['branch','out',{text:'Bạn muốn làm khu vực nào? Bạn chia sẻ thông tin giúp mình để hẹn PV nhé. [Form]'}],
+    ['customer','out',{text:'✅ Chia sẻ: Nguyễn Minh Anh · 0912 345 678 · Đồng ý nhận tin'}],
+    ['branch','success',{text:'🗂️ Hồ sơ ghi nhận · Khóa: SĐT'}]]},
+  { title:'5. Gửi ZBS Message xác nhận hồ sơ', desc:'Giai đoạn 2: HR gửi theo danh sách qua công cụ ZBS. Giai đoạn 3: hệ thống tuyển dụng tự động gửi khi có hồ sơ mới.', hl:'customer', act:[
+    ['branch','system',{text:'📡 Gửi mẫu "Xác nhận tiếp nhận hồ sơ" theo SĐT'}],
+    ['customer','in',{sender:'ZBS Message · Tam Hảo', avatar:'📩', text:'Tam Hảo Hà Nội đã nhận hồ sơ Pha chế part-time của bạn. Phản hồi trong 24–48h.'}]]},
+  { title:'6. Lịch phỏng vấn → Nhắc lịch → Kết quả', desc:'Mỗi mốc trạng thái hồ sơ tương ứng một mẫu ZBS Message; ứng viên phản hồi bằng nút CTA.', hl:'customer', act:[
+    ['customer','in',{sender:'ZBS Message · Tam Hảo', avatar:'📩', text:'Thư mời PV: 09:30 Thứ Năm 15/10 · CH Tam Hảo Cầu Giấy [Xác nhận] [Đổi lịch]'}],
+    ['customer','out',{text:'Xác nhận tham gia'}],
+    ['branch','tagging',{text:'🏷️ Trạng thái → Hẹn PV (đã xác nhận)'}],
+    ['customer','in',{sender:'ZBS Message · Tam Hảo', avatar:'📩', text:'🎉 Chúc mừng bạn trúng tuyển! Nhận việc 20/10/2026.'}],
+    ['branch','success',{text:'✅ Trúng tuyển · Hoàn tất hành trình'}]]}
+];
+document.getElementById('opsNav').innerHTML = OPS.map((o,i)=>`<div class="ops-step-btn" onclick="gotoOps(${i})">${i+1}</div>`).join('');
+function clearOps(){ ['customer','hq','branch'].forEach(l=>document.getElementById('ops-chat-'+l).innerHTML=''); }
+function addOps(lane,type,d){
+  const el=document.createElement('div'); el.className='ops-msg '+type;
+  const bubble = `<div class="ops-msg-bubble">${d.text}</div>`;
+  if(type==='in') el.innerHTML = `<div class="ops-msg-avatar" style="background:#E3F2FD">${d.avatar||''}</div><div>${d.sender?`<div class="ops-msg-sender">${d.sender}</div>`:''}${bubble}</div>`;
+  else el.innerHTML = `<div>${bubble}</div>`;
+  const L=document.getElementById('ops-chat-'+lane); L.appendChild(el); L.scrollTop=L.scrollHeight;
+}
+async function playOps(i){
+  const o=OPS[i];
+  document.getElementById('opsStepTitle').textContent=o.title;
+  document.getElementById('opsStepDesc').textContent=o.desc;
+  document.getElementById('ops-progress-bar').style.width=((i+1)/OPS.length*100)+'%';
+  document.getElementById('ops-step-pct').textContent=`Bước ${i+1} / ${OPS.length}`;
+  document.querySelectorAll('.ops-step-btn').forEach((b,j)=>{ b.classList.remove('active','done'); if(j<i) b.classList.add('done'); if(j===i) b.classList.add('active'); });
+  document.querySelectorAll('.ops-lane').forEach(l=>l.classList.remove('highlight'));
+  document.getElementById('lane-'+o.hl).classList.add('highlight');
+  for(const a of o.act){ await new Promise(r=>setTimeout(r,500)); addOps(a[0],a[1],a[2]); }
+}
+function gotoOps(i){ opsIdx=i; clearOps(); for(let j=0;j<i;j++) OPS[j].act.forEach(a=>addOps(a[0],a[1],a[2])); playOps(i); }
+function nextOps(){ if(opsIdx<OPS.length-1){ opsIdx++; playOps(opsIdx);} else showToast('🎉 Hoàn tất mô phỏng vận hành'); }
+function prevOps(){ if(opsIdx>0) gotoOps(opsIdx-1); }
+
+/* ---- TAB 4 CRM ---- */
+const STATUSES = ['Mới','Đã liên hệ','Hẹn PV','Đã PV','Trúng tuyển','Không phù hợp'];
+const CANDS = [
+  { n:'Nguyễn Minh Anh', a:'👩‍🎓', b:'tamhao', area:'Hà Nội', job:'Pha chế part-time', src:'Menu OA', s:'Hẹn PV', phone:'0912 ••• 678', last:'Em xác nhận tham gia PV ạ', t:'09:12', shift:'Ca tối' },
+  { n:'Trần Quốc Bảo', a:'👨', b:'bacogai', area:'Hà Nội', job:'Nhân viên bếp', src:'Zalo Ads', s:'Mới', phone:'0987 ••• 221', last:'Cửa hàng Hà Đông còn tuyển không ạ?', t:'08:47', shift:'Toàn thời gian' },
+  { n:'Lê Thu Hà', a:'👩', b:'maycha', area:'HCM', job:'Thu ngân', src:'Form website', s:'Đã liên hệ', phone:'0938 ••• 104', last:'Dạ em gửi CV rồi ạ', t:'Hôm qua', shift:'Ca sáng' },
+  { n:'Phạm Gia Huy', a:'🧑', b:'trahu', area:'HCM', job:'Ca trưởng', src:'Giới thiệu', s:'Trúng tuyển', phone:'0909 ••• 553', last:'Cảm ơn chị, em sẽ đến đúng giờ', t:'Hôm qua', shift:'Toàn thời gian' },
+  { n:'Đỗ Khánh Linh', a:'👩‍🦱', b:'tamhao', area:'Hà Nội', job:'Pha chế part-time', src:'Menu OA', s:'Đã PV', phone:'0966 ••• 870', last:'Khi nào có kết quả ạ?', t:'T2', shift:'Ca tối' }
+];
+let crmFilter='Tất cả', crmSel=0;
+function renderCrm(){
+  const chips=['Tất cả','Hà Nội','Mới','Hẹn PV','Trúng tuyển','Tam Hảo'];
+  document.getElementById('crmFilters').innerHTML = chips.map(c=>`<div class="crm-filter-chip ${c===crmFilter?'active':''}" onclick="crmFilter='${c}';renderCrm()">${c}</div>`).join('');
+  const list = CANDS.map((c,i)=>({c,i})).filter(({c})=> crmFilter==='Tất cả' || c.area===crmFilter || c.s===crmFilter || BRANDS[c.b].short===crmFilter);
+  document.getElementById('crmList').innerHTML = list.map(({c,i})=>`<div class="crm-convo ${i===crmSel?'active':''}" onclick="crmSel=${i};renderCrm()"><div class="crm-avatar-box" style="background:${BRANDS[c.b].bg}">${c.a}</div><div class="crm-convo-info"><div class="crm-convo-name">${c.n}</div><div class="crm-convo-preview">${c.last}</div><div class="crm-convo-tags"><span class="tag-pill tag-process ${c.s==='Trúng tuyển'?'green':''}">● ${c.s}</span><span class="tag-pill tag-branch">${BRANDS[c.b].short}</span><span class="tag-pill tag-need">${c.area}</span></div></div><div class="crm-convo-meta"><div class="crm-convo-time">${c.t}</div></div></div>`).join('') || '<div style="padding:16px;font-size:12px;color:var(--text-muted)">Không có hội thoại</div>';
+  const c=CANDS[crmSel];
+  document.getElementById('pAvatar').textContent=c.a;
+  document.getElementById('pName').textContent=c.n;
+  document.getElementById('pMeta').textContent=`${c.job} · ${BRANDS[c.b].name}`;
+  document.getElementById('pGrid').innerHTML = [['SĐT',c.phone],['Khu vực',c.area],['Ca mong muốn',c.shift],['Nguồn',c.src],['Đồng ý nhận tin','✅ Có'],['Tin ZBS đã gửi', c.s==='Mới'?'0':(c.s==='Đã liên hệ'?'1':(c.s==='Trúng tuyển'?'3':'2'))]].map(r=>`<div class="crm-profile-row"><div class="crm-profile-lbl">${r[0]}</div><div class="crm-profile-val">${r[1]}</div></div>`).join('');
+  document.getElementById('pStatus').innerHTML = STATUSES.map(s=>`<span class="tag-pill tag-process tag-click ${s===c.s?'on':''} ${s==='Trúng tuyển'?'green':''}" onclick="setStatus('${s}')">${s}</span>`).join('');
+  document.getElementById('pTags').innerHTML = `<span class="tag-pill tag-branch">${BRANDS[c.b].short}</span><span class="tag-pill tag-need">${c.area}</span><span class="tag-pill tag-loyalty">${c.src}</span>`;
+}
+function setStatus(s){ CANDS[crmSel].s=s; renderCrm(); const map={'Đã liên hệ':'Xác nhận hồ sơ','Hẹn PV':'Lịch phỏng vấn','Trúng tuyển':'Thông báo kết quả'}; showToast(map[s]?`🏷️ ${s} → gợi ý gửi ZBS "${map[s]}"`:`🏷️ Cập nhật: ${s}`); }
+renderCrm();
+
+/* ---- TAB 5 ---- */
+let chartsDone=false;
+function initCharts(){
+  if(chartsDone || typeof Chart==='undefined') return; chartsDone=true;
+  Chart.defaults.font.family="'Outfit', sans-serif";
+  new Chart(document.getElementById('chFunnel'),{type:'bar',data:{labels:['Hồ sơ','Đủ điều kiện','Hẹn PV','Đến PV','Nhận việc'],datasets:[{data:[1240,880,610,451,215],backgroundColor:['#0068FF','#2F86FF','#5EA1FF','#8DBCFF','#10B981'],borderRadius:6}]},options:{indexAxis:'y',plugins:{legend:{display:false}},maintainAspectRatio:false}});
+  new Chart(document.getElementById('chBrand'),{type:'doughnut',data:{labels:['MayCha','Tam Hảo','Ba Cô Gái','Trà Hú','Văn phòng/Kho'],datasets:[{data:[34,26,18,12,10],backgroundColor:['#F59E0B','#EC4899','#EF4444','#10B981','#64748B']}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
+  new Chart(document.getElementById('chRegion'),{type:'line',data:{labels:['T1','T2','T3','T4','T5','T6','T7','T8'],datasets:[{label:'HCM',data:[180,192,175,201,198,210,205,214],borderColor:'#0068FF',tension:.35},{label:'Hà Nội',data:[42,48,55,71,86,95,104,118],borderColor:'#10B981',tension:.35}]},options:{maintainAspectRatio:false}});
+  new Chart(document.getElementById('chSource'),{type:'bar',data:{labels:['Menu OA','Form website','Zalo Ads','Giới thiệu'],datasets:[{data:[44,31,17,8],backgroundColor:'#0068FF',borderRadius:6}]},options:{plugins:{legend:{display:false}},maintainAspectRatio:false,scales:{y:{ticks:{callback:v=>v+'%'}}}}});
+}
+function countKpi(){ document.querySelectorAll('[data-count]').forEach(el=>{ const end=+el.dataset.count, suf=el.dataset.suffix||''; let cur=0; const step=Math.max(1,Math.ceil(end/40)); const iv=setInterval(()=>{ cur=Math.min(end,cur+step); el.textContent=cur.toLocaleString('vi-VN')+suf; if(cur>=end) clearInterval(iv); },25); }); }
+
+/* ---- TAB 6 ---- */
+const TPL = {
+  confirm:{ label:'✉️ Xác nhận hồ sơ', title:'Xác nhận tiếp nhận hồ sơ', fields:{ten:'Nguyễn Minh Anh', vitri:'Pha chế part-time', thuonghieu:'Tam Hảo Hà Nội', phanhoi:'24–48h'}, rows:[['Vị trí','vitri'],['Thương hiệu','thuonghieu'],['Phản hồi dự kiến','phanhoi']], intro:f=>`Chào ${f.ten}, chúng tôi đã nhận hồ sơ ứng tuyển của bạn.`, btns:['Xem quyền lợi'] },
+  interview:{ label:'📅 Lịch phỏng vấn', title:'Thư mời phỏng vấn', fields:{ten:'Nguyễn Minh Anh', vitri:'Pha chế part-time', thoigian:'09:30 · 15/10/2026', diadiem:'CH Tam Hảo Cầu Giấy'}, rows:[['Vị trí','vitri'],['Thời gian','thoigian'],['Địa điểm','diadiem']], intro:f=>`Chào ${f.ten}, mời bạn tham gia phỏng vấn.`, btns:['Xác nhận','Đổi lịch'] },
+  remind:{ label:'⏰ Nhắc lịch PV', title:'Nhắc lịch phỏng vấn ngày mai', fields:{ten:'Nguyễn Minh Anh', thoigian:'09:30 · 15/10/2026', diadiem:'CH Tam Hảo Cầu Giấy', mangtheo:'CCCD'}, rows:[['Thời gian','thoigian'],['Địa điểm','diadiem'],['Mang theo','mangtheo']], intro:f=>`${f.ten} ơi, bạn có lịch phỏng vấn vào ngày mai.`, btns:['Chỉ đường'] },
+  result:{ label:'🎉 Kết quả tuyển dụng', title:'Thông báo kết quả tuyển dụng', fields:{ten:'Nguyễn Minh Anh', vitri:'Pha chế part-time', ketqua:'Trúng tuyển', ngay:'20/10/2026'}, rows:[['Vị trí','vitri'],['Kết quả','ketqua'],['Ngày nhận việc','ngay']], intro:f=>`Chào ${f.ten}, Thịnh Thế Vinh Hoa gửi bạn kết quả phỏng vấn.`, btns:['Xác nhận nhận việc'] }
+};
+const FIELD_LBL={ten:'Tên ứng viên',vitri:'Vị trí',thuonghieu:'Thương hiệu',phanhoi:'Thời gian phản hồi',thoigian:'Thời gian',diadiem:'Địa điểm',mangtheo:'Giấy tờ mang theo',ketqua:'Kết quả',ngay:'Ngày nhận việc'};
+let tplKey='confirm', method='phone';
+function renderTplTabs(){ document.getElementById('tplTabs').innerHTML = Object.entries(TPL).map(([k,v])=>`<div class="tpl-tab ${k===tplKey?'active':''}" onclick="tplKey='${k}';renderTplTabs();renderFields()">${v.label}</div>`).join(''); }
+function renderFields(){ const t=TPL[tplKey]; document.getElementById('tplFields').innerHTML = Object.entries(t.fields).map(([k,v])=>`<div><span class="fg-lbl" style="font-size:11px;margin-bottom:4px">${FIELD_LBL[k]}</span><input class="fg-input" value="${v}" oninput="TPL['${tplKey}'].fields['${k}']=this.value;renderPreview()"></div>`).join(''); renderPreview(); document.getElementById('sentBox').style.display='none'; }
+function renderPreview(){ const t=TPL[tplKey], f=t.fields; document.getElementById('tplPreview').innerHTML = `<div class="zbs-msg-hdr"><span>ZBS MESSAGE</span><span>${method==='phone'?'Gửi theo SĐT':'Gửi theo UID'}</span></div><div class="zbs-msg-body"><div class="t">${t.title}</div>${t.intro(f)}${t.rows.map(r=>`<div class="zbs-msg-row"><span>${r[0]}</span><b>${f[r[1]]}</b></div>`).join('')}</div><div class="zbs-msg-btns">${t.btns.map(b=>`<div>${b}</div>`).join('')}</div>`; }
+function setMethod(m){ method=m; document.getElementById('m-phone').classList.toggle('active',m==='phone'); document.getElementById('m-uid').classList.toggle('active',m==='uid'); renderPreview(); }
+function sendTpl(){ const box=document.getElementById('sentBox'); box.style.display='block'; box.innerHTML = `<div class="sent-notification-icon">✅</div><div class="sent-notification-title">Đã gửi (mô phỏng): ${TPL[tplKey].title}</div><div class="sent-notification-sub">${method==='phone'?'Theo dõi được trạng thái đã tới máy. Kênh SĐT không có trạng thái "đã đọc".':'Theo dõi được sự kiện đã nhận / đã xem trên Zalo Mobile.'}</div>`; showToast('📡 Đã mô phỏng gửi ZBS Message'); }
+renderTplTabs(); renderFields();
+</script>
+</body>
+</html>
